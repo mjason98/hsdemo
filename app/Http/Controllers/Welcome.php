@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Wellcome extends Controller
+class Welcome extends Controller
 {
-    public function wellcome()
+    public function welcome()
     {
         return view('welcome');
     }
