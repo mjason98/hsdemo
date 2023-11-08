@@ -1,5 +1,16 @@
 <x-layout>
-    <p> Wellcome
-    <p> Foto
-    <p> loging/register
+    @guest
+    
+    <!-- <p> Wellcome
+    <p> Foto -->
+    
+    <x-auth-form/>
+    
+    @endguest
+
+    @auth
+    
+    link to posts
+    
+    @endauth
 </x-layout>
