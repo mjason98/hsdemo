@@ -11,15 +11,21 @@ connect to it, then create the database:
 mysql -h127.0.0.1 -uroot -proot
 
 []> create database hsdemo;
-[]>exit;
+[]> exit;
 ```
 
-Lastly, update the .env file in the root folder of the project with the connection configuration for the database. If it does not exist, copy *.env.example* to a *.env* file then change the respective variables in it.
+Lastly, update the .env file in the root folder of the project with the connection configuration for the database. If it does not exist, copy *.env.example* to an *.env* file then change the respective variables in it.
 
 ```shell
 cp .env.example .env
 ```
 
+### Laravel Migartions
+
+To run your first migrations, use the following command
+```shell
+php artisan migrate:fresh --seed
+```
 
 ## RDB Design
 
