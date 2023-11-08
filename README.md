@@ -11,3 +11,5 @@ This is a social media like app, for food recepies.
 ## Environment variables
 
 ## Instalation Instructions
+
+For the database configuration, follow this [instructions.](docs/database.md)
