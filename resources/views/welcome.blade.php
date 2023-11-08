@@ -1,3 +1,5 @@
 <x-layout>
-    Wellcome
+    <p> Wellcome
+    <p> Foto
+    <p> loging/register
 </x-layout>
