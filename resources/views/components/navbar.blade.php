@@ -26,8 +26,8 @@
                 </button>
             </div>
             <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div class="flex flex-shrink-0 items-center">
-                    <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+                <div class="flex flex-shrink-0 items-center invert">
+                    <img class="h-8 w-auto" src="{{ asset('icons/cooking.png') }}" alt="Xochi">
                 </div>
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
@@ -40,7 +40,7 @@
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <!-- Profile dropdown -->
                 <div class="relative ml-3" x-data="{open_profile:false}">
-                    <div class="flex flex-row items-center">
+                    <div class="flex flex-row items-center gap-x-1">
                         <div class="p-2 text-white hidden sm:block" > {{Auth::user()->name}} </div>
                         <button type="button" @click="open_profile = !open_profile" 
                         class="relative flex rounded-full bg-gray-800 text-sm hover:outline-none hover:ring-2 hover:ring-white hover:ring-offset-2 hover:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
