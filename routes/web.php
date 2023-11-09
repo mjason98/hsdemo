@@ -14,3 +14,6 @@ Route::post('/signin', [\App\Http\Controllers\SignInController::class, 'signIn']
 
 // Handle sign-out
 Route::post('/signout', [\App\Http\Controllers\SignInController::class, 'signOut'])->name('signout');
+
+//Handle explore recepies route
+Route::get('/explore', [\App\Http\Controllers\ExploreController::class, 'index'])->name('explore.index');
