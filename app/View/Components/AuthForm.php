@@ -11,12 +11,16 @@ class AuthForm extends Component
     
     public $title;
     public $actionurl;
+    public $changeMessageHeader;
+    public $changeMessageContent;
 
 
-    public function __construct($title, $actionurl)
+    public function __construct($title, $actionurl, $changeMessageHeader='', $changeMessageContent='')
     {
         $this->title = $title;
         $this->actionurl = $actionurl;
+        $this->changeMessageHeader = $changeMessageHeader;
+        $this->changeMessageContent = $changeMessageContent;
     }
 
     /**

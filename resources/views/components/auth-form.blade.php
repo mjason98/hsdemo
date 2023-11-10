@@ -13,9 +13,9 @@
 
 
     <div class="mt-8 text-center text-sm text-gray-500">
-      Not a member?
+      {{ $changeMessageHeader }}
       <a href="{{route('signup.form')}}" class="font-semibold leading-6 text-indigo-700 hover:text-amber-600">
-        Create one for free
+        {{ $changeMessageContent }}
       </a>
     </div>
   </div>
