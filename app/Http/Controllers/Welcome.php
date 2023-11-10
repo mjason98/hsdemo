@@ -8,8 +8,9 @@ class Welcome extends Controller
 {
     public function welcome()
     {
-        if (Auth::check())
+        if (Auth::check()) {
             return redirect()->intended(route('explore.index'));
+        }
 
         return view('welcome');
     }

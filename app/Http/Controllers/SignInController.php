@@ -20,7 +20,7 @@ class SignInController extends Controller
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->intended('/'); // redirect to home with auth
+            return redirect()->intended(route('explore.index')); // redirect to home with auth
         }
 
         return back()->withInput()->withErrors(['email' => 'Invalid credentials']);
@@ -29,6 +29,7 @@ class SignInController extends Controller
     public function signOut()
     {
         Auth::logout();
+
         return redirect('/');
     }
 }
