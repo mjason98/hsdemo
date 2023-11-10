@@ -14,7 +14,7 @@
             <div class="text-5xl w-80 text-center bold" style="font-family: 'Josefin Sans', sans-serif;">
                 Create and discover through the love of food
             </div>
-            <form action="{{ route('signin.form') }}" method="get">
+            <form action="{{ route('login') }}" method="get">
                 <button class="relative bg-black rounded-xl text-amber-500 py-2 px-6 border-b-4 border-amber-500 hover:border-blue-400 hover:text-blue-500">
                     Sign in
                 </button>
