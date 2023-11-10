@@ -18,6 +18,9 @@ Route::get('/signup', [\App\Http\Controllers\SignUpController::class, 'showSignI
 // Handle sign-in form submission
 Route::post('/signup', [\App\Http\Controllers\SignUpController::class, 'signUp'])->name('signup');
 
+Route::get('/signup/success', function () {
+    return view('signup-success');
+})->name('signup.success');
 
 // Handle sign-out
 Route::post('/signout', [\App\Http\Controllers\SignInController::class, 'signOut'])->name('signout');

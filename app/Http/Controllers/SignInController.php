@@ -16,7 +16,7 @@ class SignInController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required|confirmed',
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
