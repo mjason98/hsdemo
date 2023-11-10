@@ -13,14 +13,8 @@
         font-style: normal;
     }
 
-    @font-face {
-        font-family: 'SpringSummer';
-        src: url('{{ asset('fonts/Spring_Summer.otf') }}') format('opentype');
-        font-weight: normal;
-        font-style: normal;
-    }
-
     body {
-        font-family: 'sans-serif'; /* Use the custom fonts when available, fallback to sans-serif */
+        font-family: 'Josefin Sans', 'Oregon', sans-serif;
+        /* Use the custom fonts when available, fallback to Josefin Sans, and then to sans-serif */
     }
 </style>
