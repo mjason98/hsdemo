@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 // ray('hello world');
 
-Route::get('/', [\App\Http\Controllers\Welcome::class, 'welcome']);
+Route::get('/', [\App\Http\Controllers\Welcome::class, 'welcome'])->name('welcome');
 
 // Show sign-in form
 Route::get('/signin', [\App\Http\Controllers\SignInController::class, 'showSignInForm'])->name('signin.form');

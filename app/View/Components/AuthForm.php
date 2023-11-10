@@ -10,11 +10,13 @@ class AuthForm extends Component
 {
     
     public $title;
+    public $actionurl;
 
 
-    public function __construct($title)
+    public function __construct($title, $actionurl)
     {
         $this->title = $title;
+        $this->actionurl = $actionurl;
     }
 
     /**
