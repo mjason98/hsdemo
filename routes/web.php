@@ -12,6 +12,13 @@ Route::get('/signin', [\App\Http\Controllers\SignInController::class, 'showSignI
 // Handle sign-in form submission
 Route::post('/signin', [\App\Http\Controllers\SignInController::class, 'signIn'])->name('signin');
 
+// Show sign-in form
+Route::get('/signup', [\App\Http\Controllers\SignUpController::class, 'showSignInForm'])->name('signup.form');
+
+// Handle sign-in form submission
+Route::post('/signup', [\App\Http\Controllers\SignUpController::class, 'signUp'])->name('signup');
+
+
 // Handle sign-out
 Route::post('/signout', [\App\Http\Controllers\SignInController::class, 'signOut'])->name('signout');
 

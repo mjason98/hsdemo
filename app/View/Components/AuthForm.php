@@ -8,12 +8,13 @@ use Illuminate\View\Component;
 
 class AuthForm extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    
+    public $title;
+
+
+    public function __construct($title)
     {
-        //
+        $this->title = $title;
     }
 
     /**
