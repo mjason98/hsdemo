@@ -27,7 +27,7 @@ Route::get('/signup/success', function () {
 Route::post('/signout', [\App\Http\Controllers\SignInController::class, 'signOut'])->name('signout');
 
 //Handle explore recepies route
-Route::get('/explore', [\App\Http\Controllers\ExploreController::class, 'index'])->name('explore.index');
+Route::get('/explore', [\App\Http\Controllers\ExploreController::class, 'index'])->middleware('auth')->name('explore.index');
 
 // verify your email dude
 Route::get('/email/verify', function () {
@@ -35,6 +35,8 @@ Route::get('/email/verify', function () {
 })->middleware('auth')->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    ray('pre-redirect', $request);
+
     $request->fulfill();
 
     ray('try-redirect');
