@@ -8,23 +8,20 @@
 
                 <div class="flex grow min-h-full flex-col justify-center">
                     <div class="flex flex-row justify-center">
-                        <div class="flex flex-col justify-center content-center items-center">
-                            <div class="bg-black h-20 w-20 rounded-full">
-                                <img class="p-4 mx-auto invert" src="{{ asset('icons/cooking.png') }}" alt="Xochi">
-                            </div>
-                            <div class="w-auto text-6xl" style="font-family: 'Oregon', sans-serif;"> Xochi </div>
-                            <div>
-                                catch
-                            </div>
-                            <div>
-                                get started
+                        <div class="flex flex-col items-center">
+                            <x-applogo />
+                            <div class="mt-20 w-80 text-4xl text-center" style="font-family: 'SpringSummer', sans-serif;">
+                                <p> Share the joy of cooking.
+                                <p> Create, discover and connect through the love of food.
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
+
+    </div>
+
+    </div>
     </div>
 </x-layout>

@@ -7,13 +7,20 @@
     @font-face {
         font-family: 'Oregon';
         src: url('{{ asset('fonts/Angeline_Vintage_Demo.ttf') }}') format('truetype'),
-            url('asset('fonts/Angeline_Vintage_Demo.otf') }}') format('opentype');
+             url('{{ asset('fonts/Angeline_Vintage_Demo.otf') }}') format('opentype');
         /* Add other font formats if needed */
         font-weight: normal;
         font-style: normal;
     }
 
+    @font-face {
+        font-family: 'SpringSummer';
+        src: url('{{ asset('fonts/Spring_Summer.otf') }}') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
     body {
-        font-family: sans-serif;
+        font-family: 'sans-serif'; /* Use the custom fonts when available, fallback to sans-serif */
     }
 </style>
