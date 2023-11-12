@@ -43,3 +43,5 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
  
     return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::get('/forgotpassword', [\App\Http\Controllers\ForgotPassword::class, 'index'])->name('forgotpassword.index');
