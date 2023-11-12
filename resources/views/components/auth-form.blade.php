@@ -14,7 +14,7 @@
 
     <div class="mt-8 text-center text-sm text-gray-500">
       {{ $changeMessageHeader }}
-      <a href="{{route('signup.form')}}" class="font-semibold leading-6 text-indigo-700 hover:text-amber-600">
+      <a href="{{$changeMessageUrl}}" class="font-semibold leading-6 text-indigo-700 hover:text-amber-600">
         {{ $changeMessageContent }}
       </a>
     </div>
