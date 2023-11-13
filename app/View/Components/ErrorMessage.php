@@ -8,11 +8,11 @@ use Illuminate\View\Component;
 
 class ErrorMessage extends Component
 {
-    public $label;
+    public $message;
 
-    public function __construct($label='')
+    public function __construct($message='')
     {
-        $this->$label = $label;
+        $this->$message = $message;
     }
 
     public function render(): View|Closure|string
