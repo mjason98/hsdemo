@@ -16,6 +16,9 @@
             plugins: [require('@tailwindcss/forms')]
         }
     </script>
+
+    <script src="https://kit.fontawesome.com/7cded6f6dd.js" crossorigin="anonymous"></script>
+
     <!-- JS Alpine scripting -->
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
