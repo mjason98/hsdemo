@@ -21,7 +21,7 @@ Route::post('/signup', [\App\Http\Controllers\SignUpController::class, 'signUp']
 
 Route::get('/verify-success', function () {
     return view('signup-success');
-})->name('signup.success');
+})->name('verify.success');
 
 // Handle sign-out
 Route::post('/signout', [\App\Http\Controllers\SignInController::class, 'signOut'])->name('signout');

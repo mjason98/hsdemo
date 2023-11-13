@@ -35,6 +35,6 @@ class SignUpController extends Controller
 
         event(new Registered($user));
 
-        return redirect()->route('signup.success')->with('success', 'Signup successful!');
+        return redirect()->route('verify.success')->with('success', 'Signup successful!');
     }
 }
