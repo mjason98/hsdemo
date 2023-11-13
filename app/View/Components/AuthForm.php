@@ -8,15 +8,17 @@ use Illuminate\View\Component;
 
 class AuthForm extends Component
 {
-    
     public $title;
+
     public $actionurl;
+
     public $changeMessageHeader;
+
     public $changeMessageContent;
+
     public $changeMessageUrl;
 
-
-    public function __construct($title, $actionurl, $changeMessageHeader='', $changeMessageContent='', $changeMessageUrl='#')
+    public function __construct($title, $actionurl, $changeMessageHeader = '', $changeMessageContent = '', $changeMessageUrl = '#')
     {
         $this->title = $title;
         $this->actionurl = $actionurl;

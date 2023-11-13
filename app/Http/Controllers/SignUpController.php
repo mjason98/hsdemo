@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class SignUpController extends Controller
 {
@@ -29,7 +29,7 @@ class SignUpController extends Controller
             'email_verified_at' => null, // Set as null initially
             'verification_token' => \Illuminate\Support\Str::random(60), // Generate a verification token
         ]);
-    
+
         // Send verification email
         //$user->sendEmailVerificationNotification();
 

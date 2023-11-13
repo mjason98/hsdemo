@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Route;
 
 // ray('hello world');
 
@@ -19,7 +19,7 @@ Route::get('/signup', [\App\Http\Controllers\SignUpController::class, 'showSignI
 // Handle sign-in form submission
 Route::post('/signup', [\App\Http\Controllers\SignUpController::class, 'signUp'])->name('signup');
 
-Route::get('/signup/success', function () {
+Route::get('/verify-success', function () {
     return view('signup-success');
 })->name('signup.success');
 
@@ -40,7 +40,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     $request->fulfill();
 
     ray('try-redirect');
- 
+
     return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
