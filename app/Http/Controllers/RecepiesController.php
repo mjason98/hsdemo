@@ -13,8 +13,7 @@ class RecepiesController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        //$recepies = Recepies::where('users_id', $user->id)->get();
-        $recepies = $user->recepies();
+        $recepies = Recepies::where('users_id', $user->id)->get();
 
         return view('recepies.index', [
             'recepies' => $recepies,
