@@ -9,6 +9,11 @@ class Recepies extends Model
 {
     use HasFactory;
 
+    protected $hidden = [
+        'updated_at',
+        'created_at',
+    ];
+
     // Model Relationships -----------------------------------------------------
     public function author()
     {

@@ -10,9 +10,15 @@ class RecepiesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('recepies.index');
+        $user = $request->user();
+        //$recepies = Recepies::where('users_id', $user->id)->get();
+        $recepies = $user->recepies();
+
+        return view('recepies.index', [
+            'recepies' => $recepies,
+        ]);
     }
 
     /**
