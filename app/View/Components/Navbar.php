@@ -13,8 +13,8 @@ class Navbar extends Component
     public function __construct()
     {
         $this->nav_tabs = [
-            (object)['name' => 'Dashboard', 'url' => route('explore.index')],
-            (object)['name' => 'My Recepies', 'url' => route('recepies.index')]
+            (object) ['name' => 'Dashboard', 'url' => route('explore.index')],
+            (object) ['name' => 'My Recepies', 'url' => route('recepies.index')],
         ];
     }
 

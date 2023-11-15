@@ -1,7 +1,7 @@
 <x-layout>
     <div class="flex flex-row">
         <div class="invert basis-1/5 min-w-[250px] flex flex-col gap-24 p-2 items-center justify-center" style="background-image: url('{{ asset('imgs/flbg.jpg')}}'); background-size: 2000px; height: calc(100vh - 64px);">
-            <a href="#" class="items-center justify-center flex felx-row w-full">
+            <a href="{{route('recepies.create')}}" class="items-center justify-center flex felx-row w-full">
                 <button class="invert flex flex-col max-h-fit items-center justify-center gap-4 w-3/4 bg-black rounded-xl text-rose-500 p-6 border-b-4 border-rose-500 hover:border-blue-400 hover:text-blue-500">
                     <img src="{{ asset('imgs/im_nr.png') }}" class="w-28 h-28">
                     <div class="flex flex-row items-center justify-center gap-2">

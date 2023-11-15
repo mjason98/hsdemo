@@ -28,7 +28,7 @@ class RecepiesController extends Controller
      */
     public function create()
     {
-        //
+        return view('recepies.create');
     }
 
     /**

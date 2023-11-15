@@ -57,4 +57,9 @@ Route::post('/reset-password', [\App\Http\Controllers\ForgotPassword::class, 're
 
 // recepies routes
 Route::get('/recepies', [\App\Http\Controllers\RecepiesController::class, 'index'])->middleware(['auth'])->name('recepies.index');
+
 Route::get('/recepies/{recepy}', [\App\Http\Controllers\RecepiesController::class, 'show'])->middleware(['auth'])->name('recepies.show');
+
+Route::get('/recepies-new', [\App\Http\Controllers\RecepiesController::class, 'create'])->middleware(['auth'])->name('recepies.create');
+
+Route::post('/recepies-new', [\App\Http\Controllers\RecepiesController::class, 'store'])->middleware(['auth'])->name('recepies.store');
