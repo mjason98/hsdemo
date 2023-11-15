@@ -2,7 +2,7 @@
 
 # Xochi
 
-This is a social media like app, for food recepies.
+This is a social media like app, for food recipes.
 
 ## Demo
 

@@ -27,7 +27,7 @@ Route::get('/verify-success', function () {
 // Handle sign-out
 Route::post('/signout', [\App\Http\Controllers\SignInController::class, 'signOut'])->name('signout');
 
-//Handle explore recepies route
+//Handle explore recipes route
 Route::get('/explore', [\App\Http\Controllers\ExploreController::class, 'index'])->middleware('auth')->name('explore.index');
 
 // verify your email dude
@@ -55,11 +55,11 @@ Route::post('/forgot-password', [\App\Http\Controllers\ForgotPassword::class, 'r
 
 Route::post('/reset-password', [\App\Http\Controllers\ForgotPassword::class, 'resetPassword'])->middleware('guest')->name('password.update');
 
-// recepies routes
-Route::get('/recepies', [\App\Http\Controllers\RecepiesController::class, 'index'])->middleware(['auth'])->name('recepies.index');
+// recipes routes
+Route::get('/recipes', [\App\Http\Controllers\RecipesController::class, 'index'])->middleware(['auth'])->name('recipes.index');
 
-Route::get('/recepies/{recepy}', [\App\Http\Controllers\RecepiesController::class, 'show'])->middleware(['auth'])->name('recepies.show');
+Route::get('/recipes/{recipe}', [\App\Http\Controllers\RecipesController::class, 'show'])->middleware(['auth'])->name('recipes.show');
 
-Route::get('/recepies-new', [\App\Http\Controllers\RecepiesController::class, 'create'])->middleware(['auth'])->name('recepies.create');
+Route::get('/recipes-new', [\App\Http\Controllers\RecipesController::class, 'create'])->middleware(['auth'])->name('recipes.create');
 
-Route::post('/recepies-new', [\App\Http\Controllers\RecepiesController::class, 'store'])->middleware(['auth'])->name('recepies.store');
+Route::post('/recipes-new', [\App\Http\Controllers\RecipesController::class, 'store'])->middleware(['auth'])->name('recipes.store');

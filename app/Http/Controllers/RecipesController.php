@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Recepies;
+use App\Models\Recipes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RecepiesController extends Controller
+class RecipesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +14,12 @@ class RecepiesController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $recepies = Recepies::where('users_id', $user->id)
+        $recipes = Recipes::where('users_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('recepies.index', [
-            'recepies' => $recepies,
+        return view('recipes.index', [
+            'recipes' => $recipes,
         ]);
     }
 
@@ -28,7 +28,7 @@ class RecepiesController extends Controller
      */
     public function create()
     {
-        return view('recepies.create');
+        return view('recipes.create');
     }
 
     /**
@@ -42,13 +42,13 @@ class RecepiesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Recepies $recepy)
+    public function show(Recipes $recipe)
     {
-        $author_name = $recepy->author()->first()->name;
-        $is_author = Auth::id() == $recepy->users_id;
+        $author_name = $recipe->author()->first()->name;
+        $is_author = Auth::id() == $recipe->users_id;
 
-        return view('recepies.show', [
-            'recepy' => $recepy,
+        return view('recipes.show', [
+            'recipe' => $recipe,
             'author_name' => $author_name,
             'is_author' => $is_author,
         ]);
@@ -57,7 +57,7 @@ class RecepiesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Recepies $recepies)
+    public function edit(Recipes $recipes)
     {
         //
     }
@@ -65,7 +65,7 @@ class RecepiesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Recepies $recepies)
+    public function update(Request $request, Recipes $recipes)
     {
         //
     }
@@ -73,7 +73,7 @@ class RecepiesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Recepies $recepies)
+    public function destroy(Recipes $recipes)
     {
         //
     }

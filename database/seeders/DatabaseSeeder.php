@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Ingredients::factory(4)->create();
-        \App\Models\Recepies::factory(50)->create();
+        \App\Models\Recipes::factory(50)->create();
     }
 }

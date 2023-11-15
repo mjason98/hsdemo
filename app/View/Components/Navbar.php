@@ -14,7 +14,7 @@ class Navbar extends Component
     {
         $this->nav_tabs = [
             (object) ['name' => 'Dashboard', 'url' => route('explore.index')],
-            (object) ['name' => 'My Recepies', 'url' => route('recepies.index')],
+            (object) ['name' => 'My Recipes', 'url' => route('recipes.index')],
         ];
     }
 
