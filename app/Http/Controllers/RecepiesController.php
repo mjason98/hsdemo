@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Recepies;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RecepiesController extends Controller
 {
@@ -13,7 +14,9 @@ class RecepiesController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $recepies = Recepies::where('users_id', $user->id)->get();
+        $recepies = Recepies::where('users_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('recepies.index', [
             'recepies' => $recepies,
@@ -39,9 +42,16 @@ class RecepiesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Recepies $recepies)
+    public function show(Recepies $recepy)
     {
-        //
+        $author_name = $recepy->author()->first()->name;
+        $is_author = Auth::id() == $recepy->users_id;
+
+        return view('recepies.show', [
+            'recepy' => $recepy,
+            'author_name' => $author_name,
+            'is_author' => $is_author,
+        ]);
     }
 
     /**

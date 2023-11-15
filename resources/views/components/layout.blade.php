@@ -23,7 +23,7 @@
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 
-<body>
+<body class="bg-[#d6d6d6]">
     <x-navbar />
 
     {{$slot}}

@@ -57,3 +57,4 @@ Route::post('/reset-password', [\App\Http\Controllers\ForgotPassword::class, 're
 
 // recepies routes
 Route::get('/recepies', [\App\Http\Controllers\RecepiesController::class, 'index'])->middleware(['auth'])->name('recepies.index');
+Route::get('/recepies/{recepy}', [\App\Http\Controllers\RecepiesController::class, 'show'])->middleware(['auth'])->name('recepies.show');

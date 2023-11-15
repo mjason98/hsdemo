@@ -9,7 +9,7 @@
         <div class="invert grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 w-full gap-4 px-4 overflow-y-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-goldenrod" style="height: calc(100vh - 72px);">
             @foreach($recepies as $recepy)
             <x-white-box>
-                <a href="#">
+                <a href="{{route('recepies.show', ['recepy' => $recepy])}}">
                     <div class="text-2xl hover:text-blue-500">{{ $recepy->title }}</div>
                 </a>
                 <div class="truncate">{{ $recepy->instructions }}</div>
