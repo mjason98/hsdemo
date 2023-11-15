@@ -8,12 +8,14 @@ use Illuminate\View\Component;
 
 class Navbar extends Component
 {
-    /**
-     * Create a new component instance.
-     */
+    public $nav_tabs;
+
     public function __construct()
     {
-        //
+        $this->nav_tabs = [
+            (object)['name' => 'Dashboard', 'url' => route('explore.index')],
+            (object)['name' => 'My Recepies', 'url' => route('recepies.index')]
+        ];
     }
 
     /**
