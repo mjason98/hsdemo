@@ -8,14 +8,25 @@
             </button>
         </div>
 
-        <input value="{{old('title')?? '# Title' }}" type="text" name="title" id="title" class="text-gray-800 text-4xl bg-transparent">
-        
+        <textarea name="title" id="title" placeholder="# Title" class="text-gray-800 text-4xl resize-none border-none focus:outline-none bg-transparent w-full h-fit">{{old('title')}}</textarea>
+
+        @error('title')
+        <div class="text-red-500">{{ $message }}</div>
+        @enderror
+
         <!-- <div> Image </div> -->
         <!-- <div> Ingredients </div> -->
         <div class="text-gray-800 text-2xl">
             Instructions
         </div>
 
-        <textarea name="instructions" id="instructions" rows="4" class="px-3 text-gray-700 text-lg bg-transparent h-auto">{{old('instructions') ?? 'Seteps ....' }}</textarea>
+        @error('instructions')
+        <div class="text-red-500">{{ $message }}</div>
+        @enderror
+
+        <textarea name="instructions" id="instructions" placeholder="Seteps ...." class="resize-none border-none focus:outline-none bg-transparent w-full">{{old('instructions')}}</textarea>
+
+
     </form>
+
 </x-layout>

@@ -9,6 +9,12 @@ class Recipes extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'instructions',
+        'users_id',
+    ];
+
     protected $hidden = [
         'created_at',
     ];

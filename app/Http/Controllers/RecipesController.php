@@ -36,7 +36,17 @@ class RecipesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $recepy_form = $request->validate([
+            'title' => 'required',
+            'instructions' => 'required',
+        ]);
+
+        $recepy_form['users_id'] = Auth::id();
+
+        $recipe = new Recipes($recepy_form);
+        $recipe->save();
+
+        return redirect(route('recipes.show', compact('recipe')));
     }
 
     /**
