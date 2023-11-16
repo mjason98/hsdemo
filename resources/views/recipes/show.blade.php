@@ -1,6 +1,6 @@
 <x-layout>
     <div class="flex flex-col p-6 gap-6">
-        <div class="text-gray-800 text-4xl"> {{$recipe->title}} </div>
+        <div class="text-gray-800 text-4xl"> {!! nl2br(e($recipe->title)) !!} </div>
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-col gap-0">
                 <div class="text-gray-500 text-lg">
@@ -36,7 +36,7 @@
             Instructions
         </div>
         <div class="text-gray-700 text-lg">
-            {{$recipe->instructions}}
+            {!! nl2br(e($recipe->instructions)) !!}
         </div>
     </div>
 </x-layout>
