@@ -63,3 +63,7 @@ Route::get('/recipes/{recipe}', [\App\Http\Controllers\RecipesController::class,
 Route::get('/recipes-new', [\App\Http\Controllers\RecipesController::class, 'create'])->middleware(['auth'])->name('recipes.create');
 
 Route::post('/recipes-new', [\App\Http\Controllers\RecipesController::class, 'store'])->middleware(['auth'])->name('recipes.store');
+
+Route::get('/recipes/{recipe}/edit', [\App\Http\Controllers\RecipesController::class, 'edit'])->middleware(['auth'])->name('recipes.edit');
+
+Route::put('/recipes/{recipe}/edit', [\App\Http\Controllers\RecipesController::class, 'update'])->middleware(['auth'])->name('recipes.update');

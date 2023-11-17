@@ -67,9 +67,9 @@ class RecipesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Recipes $recipes)
+    public function edit(Recipes $recipe)
     {
-        //
+        return view('recipes.edit', compact('recipe'));
     }
 
     /**

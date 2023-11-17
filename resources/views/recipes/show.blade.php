@@ -16,7 +16,7 @@
                 <div class="text-gray-500 text-sm"> {{ date('F j, Y', strtotime($recipe->updated_at)) }} </div>
             </div>
             @if($is_author == true)
-            <a href="#">
+            <a href="{{route('recipes.edit', ['recipe' => $recipe])}}">
                 <button class="w-fit h-10 px-3 bg-amber-500 text-white rounded-xl p-2 hover:bg-amber-600">
                     Edit recipe
                     <i class="fas fa-edit"></i>

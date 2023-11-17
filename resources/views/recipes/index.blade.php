@@ -8,11 +8,11 @@
                 </x-basic-button>
             </a>
         </div>
-        <div class="invert grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 w-full gap-4 px-4 overflow-y-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-goldenrod" style="height: calc(100vh - 72px);">
+        <div class="invert grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full gap-4 px-4 overflow-y-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-goldenrod" style="height: calc(100vh - 72px);">
             @foreach($recipes as $recipe)
             <x-white-box>
                 <a href="{{route('recipes.show', ['recipe' => $recipe])}}">
-                    <div class="text-2xl hover:text-blue-500">{{ $recipe->title }}</div>
+                    <div class="text-2xl hover:text-blue-500 whitespace-normal truncate">{{ $recipe->title }}</div>
                 </a>
                 <div class="truncate">{{ $recipe->instructions }}</div>
                 <div class="flex flex-row gap-4 justify-end">
