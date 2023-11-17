@@ -24,9 +24,6 @@ class IngredientsFactory extends Factory
     {
         return [
             'name' => fake()->unique()->randomElement($this->someIngredients),
-            'users_id' => function () {
-                return User::all()->random(1)->first()->id;
-            },
         ];
     }
 }

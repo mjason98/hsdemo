@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('users_id')->constrained();
             $table->timestamps();
         });
     }
