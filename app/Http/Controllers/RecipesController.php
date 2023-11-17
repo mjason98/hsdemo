@@ -41,7 +41,7 @@ class RecipesController extends Controller
             'instructions' => 'required',
         ]);
 
-        $recepy_form['users_id'] = Auth::id();
+        $recepy_form['users_id'] = auth()->id();
 
         $recipe = new Recipes($recepy_form);
         $recipe->save();
