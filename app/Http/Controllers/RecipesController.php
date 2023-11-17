@@ -19,10 +19,10 @@ class RecipesController extends Controller
         //     ->get();
 
         $recipes = Recipes::query()
-        ->with(['ingredients'])
-        ->where('users_id', auth()->id())
-        ->orderBy('created_at', 'desc')
-        ->get();
+            ->with(['ingredients'])
+            ->where('users_id', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('recipes.index', [
             'recipes' => $recipes,
@@ -75,6 +75,10 @@ class RecipesController extends Controller
      */
     public function edit(Recipes $recipe)
     {
+        $recipe->ingredients = $recipe->ingredients
+            ->pluck('name')
+            ->implode(PHP_EOL);
+
         return view('recipes.edit', compact('recipe'));
     }
 
@@ -93,7 +97,7 @@ class RecipesController extends Controller
 
         $recipe['title'] = $request->title;
         $recipe['instructions'] = $request->instructions;
-        
+
         $recipe->save();
 
         return redirect(route('recipes.show', compact('recipe')));
@@ -105,10 +109,9 @@ class RecipesController extends Controller
     public function destroy(Recipes $recipe)
     {
         $user_id = auth()->id();
-        
+
         //delete
-        if ($user_id == $recipe->users_id)
-        {
+        if ($user_id == $recipe->users_id) {
             $recipe->delete();
             return redirect(route('recipes.index'));
         }
