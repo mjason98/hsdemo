@@ -75,16 +75,35 @@ class RecipesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Recipes $recipes)
+    public function update(Request $request, Recipes $recipe)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'instructions' => 'required',
+        ]);
+
+        $recipe['title'] = $request->title;
+        $recipe['instructions'] = $request->instructions;
+        
+        $recipe->save();
+
+        return redirect(route('recipes.show', compact('recipe')));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Recipes $recipes)
+    public function destroy(Recipes $recipe)
     {
-        //
+        $user_id = auth()->id();
+        
+        //delete
+        if ($user_id == $recipe->users_id)
+        {
+            $recipe->delete();
+            return redirect(route('recipes.index'));
+        }
+
+        return back()->withInput()->withErrors(['delete' => 'User is not the owner of the recipe']);
     }
 }

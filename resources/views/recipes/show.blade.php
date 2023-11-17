@@ -22,12 +22,17 @@
                     <i class="fas fa-edit"></i>
                 </button>
             </a>
-            <a href="#">
+            <form method="post" action="{{route('recipes.destroy', ['recipe' => $recipe])}}">
+                @csrf
+                @method('delete')
                 <button class="w-fit h-10 px-3 bg-rose-500 text-white rounded-xl p-2 hover:bg-rose-600">
                     Delete recipe
                     <i class="fas fa-trash"></i>
                 </button>
-            </a>
+                @error('delete')
+                {{$message}}
+                @enderror
+            </form>
             @endif
         </div>
         <!-- <div> Image </div> -->

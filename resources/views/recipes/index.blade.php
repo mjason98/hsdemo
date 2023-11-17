@@ -16,7 +16,7 @@
                 </a>
                 <div class="truncate">{{ $recipe->instructions }}</div>
                 <div class="flex flex-row gap-4 justify-end">
-                    <a href="#">
+                    <a href="{{route('recipes.edit', ['recipe' => $recipe])}}">
                         <button class="w-10 h-10 bg-amber-500 text-white rounded-xl p-2 hover:bg-amber-600">
                             <i class="fas fa-edit"></i>
                         </button>

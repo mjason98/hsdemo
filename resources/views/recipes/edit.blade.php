@@ -1,5 +1,5 @@
 <x-layout>
-    <form x-data="{ isLoaded: false }" class="flex flex-col p-6 gap-6" action="{{route('recipes.store')}}" method="post">
+    <form x-data="{ isLoaded: false }" class="flex flex-col p-6 gap-6" action="{{route('recipes.update', ['recipe'=> $recipe])}}" method="post">
         @csrf
         @method('put')
 

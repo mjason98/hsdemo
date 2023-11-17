@@ -56,14 +56,4 @@ Route::post('/forgot-password', [\App\Http\Controllers\ForgotPassword::class, 'r
 Route::post('/reset-password', [\App\Http\Controllers\ForgotPassword::class, 'resetPassword'])->middleware('guest')->name('password.update');
 
 // recipes routes
-Route::get('/recipes', [\App\Http\Controllers\RecipesController::class, 'index'])->middleware(['auth'])->name('recipes.index');
-
-Route::get('/recipes/{recipe}', [\App\Http\Controllers\RecipesController::class, 'show'])->middleware(['auth'])->name('recipes.show');
-
-Route::get('/recipes-new', [\App\Http\Controllers\RecipesController::class, 'create'])->middleware(['auth'])->name('recipes.create');
-
-Route::post('/recipes-new', [\App\Http\Controllers\RecipesController::class, 'store'])->middleware(['auth'])->name('recipes.store');
-
-Route::get('/recipes/{recipe}/edit', [\App\Http\Controllers\RecipesController::class, 'edit'])->middleware(['auth'])->name('recipes.edit');
-
-Route::put('/recipes/{recipe}/edit', [\App\Http\Controllers\RecipesController::class, 'update'])->middleware(['auth'])->name('recipes.update');
+Route::resource('recipes', \App\Http\Controllers\RecipesController::class);
