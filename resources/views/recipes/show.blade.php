@@ -65,9 +65,20 @@
             @endif
         </div>
         <!-- <div> Image </div> -->
-        <!-- <div> Ingredients </div> -->
+
         <div class="text-gray-800 text-2xl">
-            Instructions
+        <i class="fa-solid fa-carrot"></i> Ingredients 
+        </div>
+        <div class="flex flex-col gap-3">
+        @foreach($recipe->ingredients as $ingredient)
+        <div class="text-lg text-center items-center rounded-lg pl-5 w-fit">
+        <i class="fa-solid fa-circle fa-2xs"></i> {{$ingredient->name}}
+        </div>
+        @endforeach
+        </div>
+
+        <div class="text-gray-800 text-2xl">
+        <i class="fa-solid fa-bowl-food"></i> Instructions
         </div>
         <div class="text-gray-700 text-lg">
             {!! nl2br(e($recipe->instructions)) !!}

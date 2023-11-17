@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Collection;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,7 +21,11 @@ class DatabaseSeeder extends Seeder
 
         foreach($recipes as $recipe)
         {
-            $recipe->ingredients()->attach([rand(1,4), rand(1,4), rand(1,4)]);
+            $uniqueIngredientIds = Collection::times(rand(2,5), function () {
+                return rand(1, 4);
+            })->unique()->values()->all();
+        
+            $recipe->ingredients()->attach($uniqueIngredientIds);
         }
     }
 }

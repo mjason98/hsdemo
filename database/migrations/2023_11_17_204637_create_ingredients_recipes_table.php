@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('ingredients_recipes', function (Blueprint $table) {
             $table->foreignId('ingredients_id');
             $table->foreignId('recipes_id');
+
+            $table->unique(['ingredients_id', 'recipes_id']);
         });
     }
 
