@@ -82,6 +82,9 @@ class RecipesController extends Controller
             'instructions' => 'required',
         ]);
 
+        if (auth()->id() != $recipe->users_id)
+            return back()->withInput()->withErrors(['error' => 'User is not the owner of the recipe']);
+
         $recipe['title'] = $request->title;
         $recipe['instructions'] = $request->instructions;
         
