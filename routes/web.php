@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 // ray('hello world');
 
 Route::get('/', [\App\Http\Controllers\Welcome::class, 'welcome'])->name('welcome');
+Route::get('/home', [\App\Http\Controllers\Welcome::class, 'welcome']);
 
 // Show sign-in form
 Route::get('/signin', [\App\Http\Controllers\SignInController::class, 'showSignInForm'])->name('login');
@@ -26,7 +27,7 @@ Route::get('/verify-success', function () {
 // Handle sign-out
 Route::post('/signout', [\App\Http\Controllers\SignInController::class, 'signOut'])->name('signout');
 
-//Handle explore recepies route
+//Handle explore recipes route
 Route::get('/explore', [\App\Http\Controllers\ExploreController::class, 'index'])->middleware('auth')->name('explore.index');
 
 // verify your email dude
@@ -53,3 +54,6 @@ Route::get('/reset-password/{token}', function (string $token) {
 Route::post('/forgot-password', [\App\Http\Controllers\ForgotPassword::class, 'recoverPassword'])->name('forgotpassword');
 
 Route::post('/reset-password', [\App\Http\Controllers\ForgotPassword::class, 'resetPassword'])->middleware('guest')->name('password.update');
+
+// recipes routes
+Route::resource('recipes', \App\Http\Controllers\RecipesController::class);

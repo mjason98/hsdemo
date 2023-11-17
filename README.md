@@ -1,8 +1,8 @@
-<p align="center"><img src="logo.png" width="200" alt="Xochi Logo"></p>
+<p align="center"><img src="logo.png" width="500" alt="Xochi Logo"></p>
 
 # Xochi
 
-This is a social media like app, for food recepies.
+This is a social media like app, for food recipes.
 
 ## Demo
 

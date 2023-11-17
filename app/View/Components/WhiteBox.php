@@ -6,16 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Navbar extends Component
+class WhiteBox extends Component
 {
-    public $nav_tabs;
-
+    /**
+     * Create a new component instance.
+     */
     public function __construct()
     {
-        $this->nav_tabs = [
-            (object) ['name' => 'Dashboard', 'url' => route('explore.index')],
-            (object) ['name' => 'My Recipes', 'url' => route('recipes.index')],
-        ];
+        //
     }
 
     /**
@@ -23,6 +21,6 @@ class Navbar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.navbar');
+        return view('components.white-box');
     }
 }
