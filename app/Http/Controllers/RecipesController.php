@@ -13,10 +13,16 @@ class RecipesController extends Controller
      */
     public function index(Request $request)
     {
-        $user = $request->user();
-        $recipes = Recipes::where('users_id', $user->id)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        // $user = $request->user();
+        // $recipes = Recipes::where('users_id', $user->id)
+        //     ->orderBy('created_at', 'desc')
+        //     ->get();
+
+        $recipes = Recipes::query()
+        ->with(['ingredients'])
+        ->where('users_id', auth()->id())
+        ->orderBy('created_at', 'desc')
+        ->get();
 
         return view('recipes.index', [
             'recipes' => $recipes,

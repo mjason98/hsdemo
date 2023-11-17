@@ -15,6 +15,16 @@
                 <a href="{{route('recipes.show', ['recipe' => $recipe])}}">
                     <div class="text-2xl hover:text-blue-500 whitespace-normal truncate">{{ $recipe->title }}</div>
                 </a>
+                <div class="flex flex-row gap-1 content-start">
+                    @foreach($recipe->ingredients->take(2) as $ingredient)
+                    <div class="bg-rose-500 text-white text-lg rounded-lg p-1 px-2">{{$ingredient->name}}</div>
+                    @endforeach
+                    @if ($recipe->ingredients->count() > 2)
+                    <div class="bg-rose-500 text-white text-lg rounded-lg p-1 px-2 justify-center">
+                    <i class="mt-1 fa-solid fa-ellipsis"></i>
+                    </div>
+                    @endif
+                </div>
                 <div class="truncate">{{ $recipe->instructions }}</div>
             </x-white-box>
             @endforeach

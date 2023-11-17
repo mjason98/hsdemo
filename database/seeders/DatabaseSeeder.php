@@ -15,12 +15,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'mjt@e.xa',
         ]);
 
-        $ingredients = \App\Models\Ingredients::factory(4)->create();
-        \App\Models\Recipes::factory(50)->create();
+        \App\Models\Ingredients::factory(4)->create();
+        $recipes = \App\Models\Recipes::factory(50)->create();
 
-        foreach($ingredients as $ingredient)
+        foreach($recipes as $recipe)
         {
-            $ingredient->recipes()->attach([rand(1,50)]);
+            $recipe->ingredients()->attach([rand(1,4), rand(1,4), rand(1,4)]);
         }
     }
 }

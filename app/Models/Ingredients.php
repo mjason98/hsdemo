@@ -9,6 +9,13 @@ class Ingredients extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+    ];
+
+    protected $hidden = [
+    ];
+
     // Model Relationships -----------------------------------------------------
     public function user()
     {
