@@ -11,22 +11,11 @@
         <div class="invert grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full gap-4 px-4 overflow-y-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-goldenrod" style="height: calc(100vh - 72px);">
             @foreach($recipes as $recipe)
             <x-white-box>
+                <!-- image -->
                 <a href="{{route('recipes.show', ['recipe' => $recipe])}}">
                     <div class="text-2xl hover:text-blue-500 whitespace-normal truncate">{{ $recipe->title }}</div>
                 </a>
                 <div class="truncate">{{ $recipe->instructions }}</div>
-                <div class="flex flex-row gap-4 justify-end">
-                    <a href="{{route('recipes.edit', ['recipe' => $recipe])}}">
-                        <button class="w-10 h-10 bg-amber-500 text-white rounded-xl p-2 hover:bg-amber-600">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                    </a>
-                    <a href="#">
-                        <button class="w-10 h-10 bg-rose-500 text-white rounded-xl p-2 hover:bg-rose-600">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </a>
-                </div>
             </x-white-box>
             @endforeach
         </div>
