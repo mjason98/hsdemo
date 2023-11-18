@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use \App\Events\NewUserCreated;
 
 class SignUpController extends Controller
 {
@@ -31,9 +32,8 @@ class SignUpController extends Controller
         ]);
 
         // Send verification email
-        //$user->sendEmailVerificationNotification();
-
         event(new Registered($user));
+        event(new NewUserCreated($user));
 
         return redirect()->route('verify.success')->with('success', 'Signup successful!');
     }
