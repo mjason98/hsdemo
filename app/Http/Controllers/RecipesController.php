@@ -78,12 +78,12 @@ class RecipesController extends Controller
      */
     public function show(Recipes $recipe)
     {
-        $author_name = $recipe->author()->first()->name;
+        $author = $recipe->author()->first();
         $is_author = Auth::id() == $recipe->users_id;
 
         return view('recipes.show', [
             'recipe' => $recipe,
-            'author_name' => $author_name,
+            'author' => $author,
             'is_author' => $is_author,
         ]);
     }
@@ -93,6 +93,9 @@ class RecipesController extends Controller
      */
     public function edit(Recipes $recipe)
     {
+        if (auth()->id() != $recipe->users_id)
+            abort(403, 'Unauthorized.');
+
         $recipe->ingredients = $recipe->ingredients
             ->pluck('name')
             ->implode(PHP_EOL);

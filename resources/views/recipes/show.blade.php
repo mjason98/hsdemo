@@ -11,8 +11,8 @@
                     @if($is_author == true)
                     you
                     @else
-                    <a href="#">
-                        {{$author_name}}
+                    <a class="hover:text-amber-800" href="{{route('user.show', ['user' => $author])}}">
+                        {{$author->name}}
                     </a>
                     @endif
                 </div>

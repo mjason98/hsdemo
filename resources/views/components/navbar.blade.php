@@ -50,7 +50,7 @@
                     </div>
 
                     <div x-show="open_profile" class="bg-gray-900 absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                        <a href="#" class="block px-4 py-2 text-sm text-white hover:text-amber-200" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+                        <a href="{{route('user.show', ['user'=>Auth::user()])}}" class="block px-4 py-2 text-sm text-white hover:text-amber-200" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
 
                         <form method="post" action="{{ route('signout') }}">
                             @csrf

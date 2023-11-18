@@ -15,6 +15,7 @@
                 <a href="{{route('recipes.show', ['recipe' => $recipe])}}">
                     <div class="w-full h-24 text-2xl hover:text-blue-500 whitespace-normal truncate">{{ $recipe->title }}</div>
                 </a>
+                <div class="text-gray-500 text-lg">{{ date('F j, Y', strtotime($recipe->created_at)) }}</div>
                 <div class="flex flex-col gap-1">
                     <div class="flex flex-row gap-1">
                         @foreach($recipe->ingredients->take(2) as $ingredient)
