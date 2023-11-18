@@ -8,12 +8,16 @@
                 </x-basic-button>
             </a>
         </div>
-        <div class="invert grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full gap-4 px-4 overflow-y-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-goldenrod" style="height: calc(100vh - 72px);">
+        <div class="invert grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-2 px-4 overflow-y-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-goldenrod" style="height: calc(100vh - 72px);">
             @foreach($recipes as $recipe)
             <x-white-box>
-                <!-- image -->
+
+                <div class="flex flex-col justify-center items-center w-full">
+                    <img src="{{$recipe->getImageUrl('thumbnail')}}" class="flex rounded-xl w-[100px] h-[100px] border-2 border-gray-800" />
+                </div>
+
                 <a href="{{route('recipes.show', ['recipe' => $recipe])}}">
-                    <div class="w-full h-24 text-2xl hover:text-blue-500 whitespace-normal truncate">{{ $recipe->title }}</div>
+                    <div class="w-full h-fit max-h-24 min-h-12 text-2xl hover:text-blue-500 whitespace-normal truncate">{{ $recipe->title }}</div>
                 </a>
                 <div class="text-gray-500 text-lg">{{ date('F j, Y', strtotime($recipe->created_at)) }}</div>
                 <div class="flex flex-col gap-1">
@@ -41,6 +45,7 @@
                         </x-tag-box>
                         @endif
                     </div>
+
                 </div>
                 <div class="max-h-10 truncate">{{ $recipe->instructions }}</div>
             </x-white-box>

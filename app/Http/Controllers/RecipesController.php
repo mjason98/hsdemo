@@ -16,7 +16,7 @@ class RecipesController extends Controller
     public function index(Request $request)
     {
         $recipes = Recipes::query()
-            ->with(['ingredients', 'tags'])
+            ->with(['ingredients', 'tags', 'media'])
             ->where('users_id', auth()->id())
             ->orderBy('created_at', 'desc')
             ->get();
