@@ -38,7 +38,8 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     {
         return ($this->media->isNotEmpty())
             ? $this->media->first()->getUrl($conversion)
-            : '/media/default/conversions/default-'.$conversion.'.jpg';
+            : '/imgs/avatar_'.$conversion.'.png';
+            // : '/media/default/conversions/default-'.$conversion.'.jpg';
     }
 
     // Medialibrary settings ----------------------------------------------------------
@@ -50,7 +51,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
             ->nonQueued();
         $this
             ->addMediaConversion('thumbnail')
-            ->fit(Manipulations::FIT_CROP, 50, 50)
+            ->fit(Manipulations::FIT_CROP, 35, 35)
             ->nonQueued();
 
     }

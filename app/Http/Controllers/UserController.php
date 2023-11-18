@@ -34,6 +34,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif', //|max:2048',
         ]);
 
         if (auth()->id() != $user->id) {
@@ -43,6 +44,11 @@ class UserController extends Controller
         $user['name'] = $request->name;
 
         $user->save();
+        
+        if($request->hasFile('image')) {
+            $user->clearMediaCollection();
+            $user->addMediaFromRequest('image')->toMediaCollection();
+        }
 
         return redirect(route('user.show', compact('user')));
     }
