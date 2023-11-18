@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="invert py-3 px-4 flex flex-col w-full gap-4 items-center" style="background-image: url('{{ asset('imgs/flbg.jpg')}}'); background-size: 2500px; height: calc(100vh - 64px);">
+    <div class="invert py-3 px-4 flex flex-col w-full gap-4 items-center" style="height: calc(100vh - 64px);">
         <div class="invert w-70 text-xl h-[48px]">
             <a href="{{route('recipes.create')}}">
                 <x-basic-button>
@@ -13,9 +13,35 @@
             <x-white-box>
                 <!-- image -->
                 <a href="{{route('recipes.show', ['recipe' => $recipe])}}">
-                    <div class="text-2xl hover:text-blue-500 whitespace-normal truncate">{{ $recipe->title }}</div>
+                    <div class="w-full h-24 text-2xl hover:text-blue-500 whitespace-normal truncate">{{ $recipe->title }}</div>
                 </a>
-                <div class="truncate">{{ $recipe->instructions }}</div>
+                <div class="flex flex-col gap-1">
+                    <div class="flex flex-row gap-1">
+                        @foreach($recipe->ingredients->take(2) as $ingredient)
+                        <x-ingredient-box>
+                            {{$ingredient->name}}
+                        </x-ingredient-box>
+                        @endforeach
+                        @if ($recipe->ingredients->count() > 2)
+                        <x-ingredient-box>
+                            <i class="mt-1 fa-solid fa-ellipsis"></i>
+                        </x-ingredient-box>
+                        @endif
+                    </div>
+                    <div class="flex flex-wrap gap-1 content-start w-full max-h-[76px]">
+                        @foreach($recipe->tags->take(3) as $tag)
+                        <x-tag-box>
+                            #{{$tag->name}}
+                        </x-tag-box>
+                        @endforeach
+                        @if ($recipe->tags->count() > 3)
+                        <x-tag-box>
+                            <i class="mt-1 fa-solid fa-ellipsis"></i>
+                        </x-tag-box>
+                        @endif
+                    </div>
+                </div>
+                <div class="max-h-10 truncate">{{ $recipe->instructions }}</div>
             </x-white-box>
             @endforeach
         </div>

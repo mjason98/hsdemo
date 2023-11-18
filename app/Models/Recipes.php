@@ -24,4 +24,14 @@ class Recipes extends Model
     {
         return $this->belongsTo(User::class, 'users_id');
     }
+
+    public function ingredients()
+    {
+        return $this->belongsToMany(Ingredients::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tags::class);
+    }
 }

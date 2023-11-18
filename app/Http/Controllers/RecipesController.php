@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ingredients;
 use App\Models\Recipes;
+use App\Models\Tags;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,8 +15,9 @@ class RecipesController extends Controller
      */
     public function index(Request $request)
     {
-        $user = $request->user();
-        $recipes = Recipes::where('users_id', $user->id)
+        $recipes = Recipes::query()
+            ->with(['ingredients', 'tags'])
+            ->where('users_id', auth()->id())
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -39,12 +42,21 @@ class RecipesController extends Controller
         $recepy_form = $request->validate([
             'title' => 'required',
             'instructions' => 'required',
+            'ingredients' => 'required',
         ]);
 
         $recepy_form['users_id'] = auth()->id();
 
         $recipe = new Recipes($recepy_form);
         $recipe->save();
+
+        $ingredients = array_map(function ($name) {
+            $ingredient = Ingredients::firstOrCreate(['name' => $name]);
+
+            return $ingredient->id;
+        }, explode(PHP_EOL, $request->ingredients));
+
+        $recipe->ingredients()->sync($ingredients);
 
         return redirect(route('recipes.show', compact('recipe')));
     }
@@ -69,6 +81,14 @@ class RecipesController extends Controller
      */
     public function edit(Recipes $recipe)
     {
+        $recipe->ingredients = $recipe->ingredients
+            ->pluck('name')
+            ->implode(PHP_EOL);
+
+        $recipe->tags = $recipe->tags
+            ->pluck('name')
+            ->implode(' ');
+
         return view('recipes.edit', compact('recipe'));
     }
 
@@ -80,15 +100,37 @@ class RecipesController extends Controller
         $request->validate([
             'title' => 'required',
             'instructions' => 'required',
+            'ingredients' => 'required',
         ]);
 
-        if (auth()->id() != $recipe->users_id)
+        if (auth()->id() != $recipe->users_id) {
             return back()->withInput()->withErrors(['error' => 'User is not the owner of the recipe']);
+        }
 
         $recipe['title'] = $request->title;
         $recipe['instructions'] = $request->instructions;
-        
+
         $recipe->save();
+
+        $ingredients = array_map(function ($name) {
+            $ingredient = Ingredients::firstOrCreate(['name' => $name]);
+
+            return $ingredient->id;
+        }, explode(PHP_EOL, $request->ingredients));
+
+        $recipe->ingredients()->sync($ingredients);
+
+        $tags = array_filter(array_map(function ($name) {
+            $name = trim($name);
+            if (!empty($name)) {
+                $tag = Tags::firstOrCreate(['name' => $name]);
+
+                return $tag->id;
+            }
+            return null;
+        }, explode(' ', str_replace(PHP_EOL, ' ', $request->tags))));
+
+        $recipe->tags()->sync($tags);
 
         return redirect(route('recipes.show', compact('recipe')));
     }
@@ -99,11 +141,11 @@ class RecipesController extends Controller
     public function destroy(Recipes $recipe)
     {
         $user_id = auth()->id();
-        
+
         //delete
-        if ($user_id == $recipe->users_id)
-        {
+        if ($user_id == $recipe->users_id) {
             $recipe->delete();
+
             return redirect(route('recipes.index'));
         }
 

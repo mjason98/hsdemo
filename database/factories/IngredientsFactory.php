@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,10 +23,6 @@ class IngredientsFactory extends Factory
     {
         return [
             'name' => fake()->unique()->randomElement($this->someIngredients),
-            'is_other' => false,
-            'users_id' => function () {
-                return User::all()->random(1)->first()->id;
-            },
         ];
     }
 }

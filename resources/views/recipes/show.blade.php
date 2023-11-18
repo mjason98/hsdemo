@@ -1,6 +1,9 @@
 <x-layout>
     <div class="flex flex-col p-6 gap-6">
         <div class="text-gray-800 text-4xl whitespace-normal truncate"> {!! nl2br(e($recipe->title)) !!} </div>
+        
+        <!-- <div> Image </div> -->
+
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-col gap-0">
                 <div class="text-gray-500 text-lg">
@@ -64,10 +67,29 @@
 
             @endif
         </div>
-        <!-- <div> Image </div> -->
-        <!-- <div> Ingredients </div> -->
+
+        <div class="text-gray-800 text-xl">
+        <i class="fa-solid fa-tag"></i> Tags
+        </div>
+        <div class="flex flex-wrap gap-2">
+        @foreach($recipe->tags as $tag)
+        <div class="border border-gray-700 border-1 text-gray-700 text-lg text-center items-center rounded-xl py-1 px-3 w-fit capitalize">#{{$tag->name}}</div>
+        @endforeach    
+        </div>
+
         <div class="text-gray-800 text-2xl">
-            Instructions
+        <i class="fa-solid fa-carrot"></i> Ingredients 
+        </div>
+        <div class="flex flex-col gap-3">
+        @foreach($recipe->ingredients as $ingredient)
+        <div class="text-lg text-center items-center rounded-lg pl-5 w-fit capitalize">
+        <i class="fa-solid fa-circle fa-2xs"></i> {{$ingredient->name}}
+        </div>
+        @endforeach
+        </div>
+
+        <div class="text-gray-800 text-2xl">
+        <i class="fa-solid fa-bowl-food"></i> Instructions
         </div>
         <div class="text-gray-700 text-lg">
             {!! nl2br(e($recipe->instructions)) !!}
