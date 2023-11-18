@@ -56,4 +56,4 @@ Route::post('/forgot-password', [\App\Http\Controllers\ForgotPassword::class, 'r
 Route::post('/reset-password', [\App\Http\Controllers\ForgotPassword::class, 'resetPassword'])->middleware('guest')->name('password.update');
 
 // recipes routes
-Route::resource('recipes', \App\Http\Controllers\RecipesController::class);
+Route::resource('recipes', \App\Http\Controllers\RecipesController::class)->middleware(['auth']);

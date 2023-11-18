@@ -15,7 +15,7 @@ class RecipesController extends Controller
     public function index(Request $request)
     {
         $recipes = Recipes::query()
-            ->with(['ingredients'])
+            ->with(['ingredients', 'tags'])
             ->where('users_id', auth()->id())
             ->orderBy('created_at', 'desc')
             ->get();
@@ -83,6 +83,10 @@ class RecipesController extends Controller
         $recipe->ingredients = $recipe->ingredients
             ->pluck('name')
             ->implode(PHP_EOL);
+        
+        $recipe->tags = $recipe->tags
+        ->pluck('name')
+        ->implode(' ');
 
         return view('recipes.edit', compact('recipe'));
     }

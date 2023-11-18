@@ -13,19 +13,31 @@
             <x-white-box>
                 <!-- image -->
                 <a href="{{route('recipes.show', ['recipe' => $recipe])}}">
-                    <div class="text-2xl hover:text-blue-500 whitespace-normal truncate">{{ $recipe->title }}</div>
+                    <div class="w-full h-24 text-2xl hover:text-blue-500 whitespace-normal truncate">{{ $recipe->title }}</div>
                 </a>
-                <div class="flex flex-row gap-1 content-start">
-                    @foreach($recipe->ingredients->take(2) as $ingredient)
-                    <div class="bg-green-700 text-white text-lg rounded-lg p-1 px-2">{{$ingredient->name}}</div>
-                    @endforeach
-                    @if ($recipe->ingredients->count() > 2)
-                    <div class="bg-green-700 text-white text-lg rounded-lg p-1 px-2 justify-center">
-                    <i class="mt-1 fa-solid fa-ellipsis"></i>
+                <div class="flex flex-col gap-1">
+                    <div class="flex flex-row gap-1">
+                        @foreach($recipe->ingredients->take(2) as $ingredient)
+                        <div class="bg-green-700 text-white text-lg rounded-lg p-1 px-2">{{$ingredient->name}}</div>
+                        @endforeach
+                        @if ($recipe->ingredients->count() > 2)
+                        <div class="bg-green-700 text-white text-lg rounded-lg p-1 px-2 justify-center">
+                            <i class="mt-1 fa-solid fa-ellipsis"></i>
+                        </div>
+                        @endif
                     </div>
-                    @endif
+                    <div class="flex flex-wrap gap-1 content-start w-full max-h-[76px]">
+                        @foreach($recipe->tags->take(3) as $tag)
+                        <div class="flex bg-blue-500 text-white text-lg rounded-lg p-1 px-2">#{{$tag->name}}</div>
+                        @endforeach
+                        @if ($recipe->tags->count() > 3)
+                        <div class="flex bg-blue-500 text-white text-lg rounded-lg p-1 px-2 justify-center">
+                            <i class="mt-1 fa-solid fa-ellipsis"></i>
+                        </div>
+                        @endif
+                    </div>
                 </div>
-                <div class="truncate">{{ $recipe->instructions }}</div>
+                <div class="max-h-10 truncate">{{ $recipe->instructions }}</div>
             </x-white-box>
             @endforeach
         </div>
