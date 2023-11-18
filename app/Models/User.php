@@ -7,15 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\Image\Manipulations;
 
-class User extends Authenticatable implements MustVerifyEmail, HasMedia
+class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia;
+    use HasApiTokens, HasFactory, InteractsWithMedia, Notifiable;
 
     protected $fillable = [
         'name',
@@ -39,7 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         return ($this->media->isNotEmpty())
             ? $this->media->first()->getUrl($conversion)
             : '/imgs/avatar_'.$conversion.'.png';
-            // : '/media/default/conversions/default-'.$conversion.'.jpg';
+        // : '/media/default/conversions/default-'.$conversion.'.jpg';
     }
 
     // Medialibrary settings ----------------------------------------------------------

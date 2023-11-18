@@ -5,7 +5,6 @@
         
         <img class="outline outline-gray-800 outline-offset-2 h-32 w-32 rounded-full" src="{{$user->getImageUrl('preview')}}" alt="profile picture">
 
-        <!-- <input name="image" type="file" /> -->
         <input type="file" name="image" id="image" accept="image/*" value="{{old('image')}}">
 
         @error('image')

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Recipes;
+use App\Models\User;
 use Illuminate\Http\Request;
-
-use function PHPUnit\Framework\returnSelf;
 
 class UserController extends Controller
 {
@@ -24,8 +22,9 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        if (auth()->id() != $user->id)
+        if (auth()->id() != $user->id) {
             return abort(403, 'Not allowed');
+        }
 
         return view('user.edit', compact('user'));
     }
@@ -44,8 +43,8 @@ class UserController extends Controller
         $user['name'] = $request->name;
 
         $user->save();
-        
-        if($request->hasFile('image')) {
+
+        if ($request->hasFile('image')) {
             $user->clearMediaCollection();
             $user->addMediaFromRequest('image')->toMediaCollection();
         }

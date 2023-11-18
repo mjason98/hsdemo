@@ -1,5 +1,5 @@
 <x-layout>
-    <form x-data="{ }" class="flex flex-col p-6 gap-6" action="{{route('recipes.store')}}" method="post">
+    <form enctype="multipart/form-data" x-data="{ }" class="flex flex-col p-6 gap-6" action="{{route('recipes.store')}}" method="post">
         @csrf
         <div class="flex flex-row w-full justify-center items-center">
             <button type="submit" class="text-xl w-fit h-10 px-4 bg-blue-700 text-white rounded-xl p-2 hover:bg-blue-900">
@@ -14,7 +14,15 @@
         <div class="text-red-500">{{ $message }}</div>
         @enderror
 
-        <!-- <div> Image </div> -->
+        <!-- <div class="w-full flex flex-row justify-center items-center">
+            <img src="" class="rounded-xl w-80 h-80 border-2 border-gray-800" />
+        </div> -->
+
+        <input type="file" name="image" id="image" accept="image/*" value="{{old('image')}}">
+
+        @error('image')
+        <div class="text-red-500">{{ $message }}</div>
+        @enderror
 
         <div class="text-gray-800 text-xl">
         <i class="fa-solid fa-tag"></i> Tags

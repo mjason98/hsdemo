@@ -1,8 +1,10 @@
 <x-layout>
     <div class="flex flex-col p-6 gap-6">
         <div class="text-gray-800 text-4xl whitespace-normal truncate"> {!! nl2br(e($recipe->title)) !!} </div>
-        
-        <!-- <div> Image </div> -->
+
+        <div class="w-full flex flex-row justify-center items-center">
+            <img src="{{$recipe->getImageUrl('preview')}}" class="rounded-xl w-80 h-80 border-2 border-gray-800" />
+        </div>
 
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-col gap-0">
@@ -18,6 +20,7 @@
                 </div>
                 <div class="text-gray-500 text-sm"> {{ date('F j, Y', strtotime($recipe->updated_at)) }} </div>
             </div>
+
             @if($is_author == true)
             <a href="{{route('recipes.edit', ['recipe' => $recipe])}}">
                 <button class="w-fit h-10 px-3 bg-amber-500 text-white rounded-xl p-2 hover:bg-amber-600">
@@ -69,27 +72,27 @@
         </div>
 
         <div class="text-gray-800 text-xl">
-        <i class="fa-solid fa-tag"></i> Tags
+            <i class="fa-solid fa-tag"></i> Tags
         </div>
         <div class="flex flex-wrap gap-2">
-        @foreach($recipe->tags as $tag)
-        <div class="border border-gray-700 border-1 text-gray-700 text-lg text-center items-center rounded-xl py-1 px-3 w-fit capitalize">#{{$tag->name}}</div>
-        @endforeach    
+            @foreach($recipe->tags as $tag)
+            <div class="border border-gray-700 border-1 text-gray-700 text-lg text-center items-center rounded-xl py-1 px-3 w-fit capitalize">#{{$tag->name}}</div>
+            @endforeach
         </div>
 
         <div class="text-gray-800 text-2xl">
-        <i class="fa-solid fa-carrot"></i> Ingredients 
+            <i class="fa-solid fa-carrot"></i> Ingredients
         </div>
         <div class="flex flex-col gap-3">
-        @foreach($recipe->ingredients as $ingredient)
-        <div class="text-lg text-center items-center rounded-lg pl-5 w-fit capitalize">
-        <i class="fa-solid fa-circle fa-2xs"></i> {{$ingredient->name}}
-        </div>
-        @endforeach
+            @foreach($recipe->ingredients as $ingredient)
+            <div class="text-lg text-center items-center rounded-lg pl-5 w-fit capitalize">
+                <i class="fa-solid fa-circle fa-2xs"></i> {{$ingredient->name}}
+            </div>
+            @endforeach
         </div>
 
         <div class="text-gray-800 text-2xl">
-        <i class="fa-solid fa-bowl-food"></i> Instructions
+            <i class="fa-solid fa-bowl-food"></i> Instructions
         </div>
         <div class="text-gray-700 text-lg">
             {!! nl2br(e($recipe->instructions)) !!}

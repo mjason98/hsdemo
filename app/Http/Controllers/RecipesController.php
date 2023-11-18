@@ -43,6 +43,7 @@ class RecipesController extends Controller
             'title' => 'required',
             'instructions' => 'required',
             'ingredients' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $recepy_form['users_id'] = auth()->id();
@@ -60,15 +61,22 @@ class RecipesController extends Controller
 
         $tags = array_filter(array_map(function ($name) {
             $name = str_replace('#', '', trim($name));
-            if (!empty($name)) {
+            if (! empty($name)) {
                 $tag = Tags::firstOrCreate(['name' => $name]);
 
                 return $tag->id;
             }
+
             return null;
         }, explode(' ', str_replace(PHP_EOL, ' ', $request->tags))));
 
         $recipe->tags()->sync($tags);
+
+        //image
+        //image
+        if ($request->hasFile('image')) {
+            $recipe->addMediaFromRequest('image')->toMediaCollection();
+        }
 
         return redirect(route('recipes.show', compact('recipe')));
     }
@@ -93,8 +101,9 @@ class RecipesController extends Controller
      */
     public function edit(Recipes $recipe)
     {
-        if (auth()->id() != $recipe->users_id)
+        if (auth()->id() != $recipe->users_id) {
             abort(403, 'Unauthorized.');
+        }
 
         $recipe->ingredients = $recipe->ingredients
             ->pluck('name')
@@ -116,6 +125,7 @@ class RecipesController extends Controller
             'title' => 'required',
             'instructions' => 'required',
             'ingredients' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
         if (auth()->id() != $recipe->users_id) {
@@ -137,15 +147,22 @@ class RecipesController extends Controller
 
         $tags = array_filter(array_map(function ($name) {
             $name = str_replace('#', '', trim($name));
-            if (!empty($name)) {
+            if (! empty($name)) {
                 $tag = Tags::firstOrCreate(['name' => $name]);
 
                 return $tag->id;
             }
+
             return null;
         }, explode(' ', str_replace(PHP_EOL, ' ', $request->tags))));
 
         $recipe->tags()->sync($tags);
+
+        //image
+        if ($request->hasFile('image')) {
+            $recipe->clearMediaCollection();
+            $recipe->addMediaFromRequest('image')->toMediaCollection();
+        }
 
         return redirect(route('recipes.show', compact('recipe')));
     }

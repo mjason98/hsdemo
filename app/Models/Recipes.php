@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Recipes extends Model
+class Recipes extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'title',
@@ -33,5 +37,26 @@ class Recipes extends Model
     public function tags()
     {
         return $this->belongsToMany(Tags::class);
+    }
+
+    public function getImageUrl($conversion)
+    {
+        return ($this->media->isNotEmpty())
+            ? $this->media->first()->getUrl($conversion)
+            : '/imgs/recipe_'.$conversion.'.jpg';
+    }
+
+    // Medialibrary settings ----------------------------------------------------------
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Manipulations::FIT_CROP, 500, 400)
+            ->nonQueued();
+        $this
+            ->addMediaConversion('thumbnail')
+            ->fit(Manipulations::FIT_CROP, 128, 128)
+            ->nonQueued();
+
     }
 }
