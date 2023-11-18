@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, InteractsWithMedia, Notifiable;
 
     protected $fillable = [
         'name',
@@ -28,4 +32,26 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
         'is_admin' => 'boolean',
     ];
+
+    public function getImageUrl($conversion)
+    {
+        return ($this->media->isNotEmpty())
+            ? $this->media->first()->getUrl($conversion)
+            : '/imgs/avatar_'.$conversion.'.png';
+        // : '/media/default/conversions/default-'.$conversion.'.jpg';
+    }
+
+    // Medialibrary settings ----------------------------------------------------------
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Manipulations::FIT_CROP, 300, 200)
+            ->nonQueued();
+        $this
+            ->addMediaConversion('thumbnail')
+            ->fit(Manipulations::FIT_CROP, 35, 35)
+            ->nonQueued();
+
+    }
 }

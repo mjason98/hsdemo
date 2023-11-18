@@ -16,7 +16,7 @@ class RecipesController extends Controller
     public function index(Request $request)
     {
         $recipes = Recipes::query()
-            ->with(['ingredients', 'tags'])
+            ->with(['ingredients', 'tags', 'media'])
             ->where('users_id', auth()->id())
             ->orderBy('created_at', 'desc')
             ->get();
@@ -43,6 +43,7 @@ class RecipesController extends Controller
             'title' => 'required',
             'instructions' => 'required',
             'ingredients' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $recepy_form['users_id'] = auth()->id();
@@ -58,6 +59,25 @@ class RecipesController extends Controller
 
         $recipe->ingredients()->sync($ingredients);
 
+        $tags = array_filter(array_map(function ($name) {
+            $name = str_replace('#', '', trim($name));
+            if (! empty($name)) {
+                $tag = Tags::firstOrCreate(['name' => $name]);
+
+                return $tag->id;
+            }
+
+            return null;
+        }, explode(' ', str_replace(PHP_EOL, ' ', $request->tags))));
+
+        $recipe->tags()->sync($tags);
+
+        //image
+        //image
+        if ($request->hasFile('image')) {
+            $recipe->addMediaFromRequest('image')->toMediaCollection();
+        }
+
         return redirect(route('recipes.show', compact('recipe')));
     }
 
@@ -66,12 +86,12 @@ class RecipesController extends Controller
      */
     public function show(Recipes $recipe)
     {
-        $author_name = $recipe->author()->first()->name;
+        $author = $recipe->author()->first();
         $is_author = Auth::id() == $recipe->users_id;
 
         return view('recipes.show', [
             'recipe' => $recipe,
-            'author_name' => $author_name,
+            'author' => $author,
             'is_author' => $is_author,
         ]);
     }
@@ -81,6 +101,10 @@ class RecipesController extends Controller
      */
     public function edit(Recipes $recipe)
     {
+        if (auth()->id() != $recipe->users_id) {
+            abort(403, 'Unauthorized.');
+        }
+
         $recipe->ingredients = $recipe->ingredients
             ->pluck('name')
             ->implode(PHP_EOL);
@@ -101,6 +125,7 @@ class RecipesController extends Controller
             'title' => 'required',
             'instructions' => 'required',
             'ingredients' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
         if (auth()->id() != $recipe->users_id) {
@@ -121,16 +146,23 @@ class RecipesController extends Controller
         $recipe->ingredients()->sync($ingredients);
 
         $tags = array_filter(array_map(function ($name) {
-            $name = trim($name);
-            if (!empty($name)) {
+            $name = str_replace('#', '', trim($name));
+            if (! empty($name)) {
                 $tag = Tags::firstOrCreate(['name' => $name]);
 
                 return $tag->id;
             }
+
             return null;
         }, explode(' ', str_replace(PHP_EOL, ' ', $request->tags))));
 
         $recipe->tags()->sync($tags);
+
+        //image
+        if ($request->hasFile('image')) {
+            $recipe->clearMediaCollection();
+            $recipe->addMediaFromRequest('image')->toMediaCollection();
+        }
 
         return redirect(route('recipes.show', compact('recipe')));
     }

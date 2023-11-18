@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('tags_id')
                 ->constrained('tags')
                 ->onDelete('cascade');
-            
+
             $table->unique(['recipes_id', 'tags_id']);
         });
     }

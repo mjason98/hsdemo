@@ -1,5 +1,5 @@
 @auth
-<nav class="bg-gray-800" x-data="{ open_menu:false }">
+<nav class="bg-gray-900" x-data="{ open_menu:false }">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -33,7 +33,7 @@
                     <div class="flex space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         @foreach($nav_tabs as $tab)
-                        <a href="{{$tab->url}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">{{ $tab->name }}</a>
+                        <a href="{{$tab->url}}" class="text-white hover:text-amber-200 px-3 py-2 text-sm font-medium" aria-current="page">{{ $tab->name }}</a>
                         @endforeach
                     </div>
                 </div>
@@ -44,17 +44,17 @@
                     <div class="flex flex-row items-center gap-x-1">
                         <div class="p-2 text-white hidden sm:block" > {{Auth::user()->name}} </div>
                         <button type="button" @click="open_profile = !open_profile" 
-                        class="relative flex rounded-full bg-gray-800 text-sm hover:outline-none hover:ring-2 hover:ring-white hover:ring-offset-2 hover:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                        class="relative flex rounded-full bg-gray-800 text-sm hover:outline-none hover:ring-2 hover:ring-amber-200 hover:ring-offset-2 hover:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                            <img class="h-8 w-8 rounded-full" src="{{Auth::user()->getImageUrl('thumbnail')}}" alt="">
                         </button>
                     </div>
 
-                    <div x-show="open_profile" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+                    <div x-show="open_profile" class="bg-gray-900 absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                        <a href="{{route('user.show', ['user'=>Auth::user()])}}" class="block px-4 py-2 text-sm text-white hover:text-amber-200" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
 
                         <form method="post" action="{{ route('signout') }}">
                             @csrf
-                            <button type="submit" class="block px-4 py-2 text-sm text-gray-700" >Sign Out</button>
+                            <button type="submit" class="block px-4 py-2 text-sm text-white hover:text-amber-200" >Sign Out</button>
                         </form>
                     </div>
 
@@ -67,7 +67,7 @@
     <div class="sm:hidden" id="mobile-menu" x-show="open_menu">
         <div class="space-y-1 px-2 pb-3 pt-2">
         @foreach($nav_tabs as $tab)
-            <a href="{{$tab->url}}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">{{$tab->name}}</a>
+            <a href="{{$tab->url}}" class="text-white block hover:text-amber-200 px-3 py-2 text-base font-medium" aria-current="page">{{$tab->name}}</a>
         @endforeach
         </div>
     </div>

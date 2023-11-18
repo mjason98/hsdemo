@@ -9,7 +9,7 @@ class ExploreController extends Controller
     public function index()
     {
         $recipes = Recipes::query()
-            ->with(['ingredients', 'tags'])
+            ->with(['ingredients', 'tags', 'media'])
             ->where('users_id', '<>', auth()->id())
             ->inRandomOrder()
             ->limit(2)
