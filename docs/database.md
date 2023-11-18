@@ -14,11 +14,7 @@ mysql -h127.0.0.1 -uroot -proot
 []> exit;
 ```
 
-Lastly, update the .env file in the root folder of the project with the connection configuration for the database. If it does not exist, copy *.env.example* to an *.env* file then change the respective variables in it.
-
-```shell
-cp .env.example .env
-```
+Lastly, update the .env file in the root folder of the project with the connection configuration for the database. 
 
 ### Laravel Migartions
 
