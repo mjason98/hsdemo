@@ -7,6 +7,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
+use App\Models\AdminEmails;
+
 class SendNewUserNotification implements ShouldQueue
 {
     use InteractsWithQueue;
@@ -15,6 +17,11 @@ class SendNewUserNotification implements ShouldQueue
     {
         $user = $event->user;
 
-        Mail::to('admin@mail.com')->send(new \App\Mail\NewUserNotification($user));
+        $admins = AdminEmails::all();
+
+        foreach($admins as $admin)
+        {
+            Mail::to($admin->email)->send(new \App\Mail\NewUserNotification($user));
+        }
     }
 }
