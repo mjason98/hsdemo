@@ -46,12 +46,20 @@ class RecipesController extends Controller
         $recepy_form = $request->validate([
             'title' => 'required',
             'instructions' => 'required',
+            'ingredients' => 'required',
         ]);
 
         $recepy_form['users_id'] = auth()->id();
 
         $recipe = new Recipes($recepy_form);
         $recipe->save();
+
+        $ingredients = array_map(function($name){
+            $ingredient = Ingredients::firstOrCreate(['name' => $name]);
+            return $ingredient->id;
+        }, explode(PHP_EOL, $request->ingredients));
+
+        $recipe->ingredients()->sync($ingredients);
 
         return redirect(route('recipes.show', compact('recipe')));
     }

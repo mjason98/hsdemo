@@ -15,9 +15,21 @@
         @enderror
 
         <!-- <div> Image </div> -->
-        <!-- <div> Ingredients </div> -->
+        
         <div class="text-gray-800 text-2xl">
-            Instructions
+            <i class="fa-solid fa-carrot"></i>
+            Ingredients
+            <span class="ml-2 text-gray-600 text-lg"> (each line is interpreted as an ingredient <i class="fa-solid fa-face-smile-wink"></i>)</span>
+        </div>
+
+        <textarea x-ref="textarea_ingredients" x-on:input="adjustRowsIngredients" name="ingredients" id="ingredients" placeholder="my first ingredient" class="h-auto resize-none border-none focus:outline-none bg-transparent w-full">{{old('ingredients')}}</textarea>
+
+        @error('ingredients')
+        <div class="text-red-500">{{ $message }}</div>
+        @enderror
+
+        <div class="text-gray-800 text-2xl">
+            <i class="fa-solid fa-bowl-food"></i> Instructions
         </div>
 
         @error('instructions')
@@ -32,6 +44,12 @@
     <script>
         function adjustRowsTitle() {
             const textarea = this.$refs.textarea_title;
+            textarea.style.height = 'auto'; // Reset height to auto
+            textarea.style.height = (textarea.scrollHeight) + 'px';
+        }
+
+        function adjustRowsIngredients() {
+            const textarea = this.$refs.textarea_ingredients;
             textarea.style.height = 'auto'; // Reset height to auto
             textarea.style.height = (textarea.scrollHeight) + 'px';
         }

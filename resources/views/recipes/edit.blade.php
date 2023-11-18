@@ -17,6 +17,7 @@
         @enderror
 
         <!-- <div> Image </div> -->
+        
         <div class="text-gray-800 text-2xl">
             <i class="fa-solid fa-carrot"></i>
             Ingredients
@@ -24,6 +25,10 @@
         </div>
 
         <textarea x-ref="textarea_ingredients" x-on:input="adjustRowsIngredients" name="ingredients" id="ingredients" placeholder="my first ingredient" class="h-auto resize-none border-none focus:outline-none bg-transparent w-full">{{old('ingredients')?? $recipe->ingredients }}</textarea>
+
+        @error('ingredients')
+        <div class="text-red-500">{{ $message }}</div>
+        @enderror
 
         <div class="text-gray-800 text-2xl">
             <i class="fa-solid fa-bowl-food"></i> Instructions
