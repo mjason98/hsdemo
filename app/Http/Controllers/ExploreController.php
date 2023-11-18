@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Recipes;
+
 class ExploreController extends Controller
 {
     public function index()
     {
-        return view('explore');
+        $recipes = Recipes::query()
+            ->with(['ingredients', 'tags'])
+            ->where('users_id', '<>', auth()->id())
+            ->inRandomOrder()
+            ->limit(2)
+            ->get();
+
+        return view('explore', compact('recipes'));
     }
 }
