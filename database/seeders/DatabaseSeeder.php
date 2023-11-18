@@ -10,6 +10,11 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        \App\Models\AdminEmails::factory()->create([
+            'name' => 'Big Boss',
+            'email' => 'admin@example.com'
+        ]);
+        
         \App\Models\User::factory(5)->create();
         \App\Models\User::factory()->create([
             'name' => 'MJTest',
