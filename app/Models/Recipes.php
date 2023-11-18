@@ -29,4 +29,9 @@ class Recipes extends Model
     {
         return $this->belongsToMany(Ingredients::class);
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tags::class);
+    }
 }

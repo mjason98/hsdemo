@@ -15,4 +15,10 @@ class Tags extends Model
 
     protected $hidden = [
     ];
+
+    // Model Relationships -----------------------------------------------------
+    public function recipes()
+    {
+        return $this->belongsToMany(Recipes::class);
+    }
 }

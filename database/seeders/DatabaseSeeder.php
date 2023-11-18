@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Ingredients::factory(4)->create();
         \App\Models\Tags::factory(10)->create();
-        
+
         $recipes = \App\Models\Recipes::factory(50)->create();
 
         foreach ($recipes as $recipe) {
@@ -27,6 +27,12 @@ class DatabaseSeeder extends Seeder
             })->unique()->values()->all();
 
             $recipe->ingredients()->attach($uniqueIngredientIds);
+
+            $uniqueTagsIds = Collection::times(rand(3, 8), function () {
+                return rand(1, 10);
+            })->unique()->values()->all();
+
+            $recipe->tags()->attach($uniqueTagsIds);
         }
     }
 }
