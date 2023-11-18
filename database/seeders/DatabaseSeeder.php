@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Ingredients::factory(4)->create();
+        \App\Models\Tags::factory(10)->create();
+        
         $recipes = \App\Models\Recipes::factory(50)->create();
 
         foreach ($recipes as $recipe) {

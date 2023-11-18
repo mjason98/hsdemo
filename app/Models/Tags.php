@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ingredients extends Model
+class Tags extends Model
 {
     use HasFactory;
 
@@ -15,10 +15,4 @@ class Ingredients extends Model
 
     protected $hidden = [
     ];
-
-    // Model Relationships -----------------------------------------------------
-    public function recipes()
-    {
-        return $this->belongsToMany(Recipes::class);
-    }
 }
