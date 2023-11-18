@@ -58,6 +58,18 @@ class RecipesController extends Controller
 
         $recipe->ingredients()->sync($ingredients);
 
+        $tags = array_filter(array_map(function ($name) {
+            $name = str_replace('#', '', trim($name));
+            if (!empty($name)) {
+                $tag = Tags::firstOrCreate(['name' => $name]);
+
+                return $tag->id;
+            }
+            return null;
+        }, explode(' ', str_replace(PHP_EOL, ' ', $request->tags))));
+
+        $recipe->tags()->sync($tags);
+
         return redirect(route('recipes.show', compact('recipe')));
     }
 
@@ -121,7 +133,7 @@ class RecipesController extends Controller
         $recipe->ingredients()->sync($ingredients);
 
         $tags = array_filter(array_map(function ($name) {
-            $name = trim($name);
+            $name = str_replace('#', '', trim($name));
             if (!empty($name)) {
                 $tag = Tags::firstOrCreate(['name' => $name]);
 

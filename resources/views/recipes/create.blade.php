@@ -15,6 +15,17 @@
         @enderror
 
         <!-- <div> Image </div> -->
+
+        <div class="text-gray-800 text-xl">
+        <i class="fa-solid fa-tag"></i> Tags
+        <span class="ml-2 text-gray-600 text-lg"> (each word is a tag)</span>
+        </div>
+
+        <textarea x-ref="textarea_tags" x-on:input="adjustRowsTags" name="tags" id="tags" placeholder="myfirstrecipe" class="h-auto resize-none border-none focus:outline-none bg-transparent w-full">{{old('tags')}}</textarea>
+
+        @error('tags')
+        <div class="text-red-500">{{ $message }}</div>
+        @enderror
         
         <div class="text-gray-800 text-2xl">
             <i class="fa-solid fa-carrot"></i>
@@ -44,6 +55,12 @@
     <script>
         function adjustRowsTitle() {
             const textarea = this.$refs.textarea_title;
+            textarea.style.height = 'auto'; // Reset height to auto
+            textarea.style.height = (textarea.scrollHeight) + 'px';
+        }
+
+        function adjustRowsTags() {
+            const textarea = this.$refs?.textarea_tags;
             textarea.style.height = 'auto'; // Reset height to auto
             textarea.style.height = (textarea.scrollHeight) + 'px';
         }
