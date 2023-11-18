@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recipes;
+use App\Models\Ingredients;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -90,6 +91,7 @@ class RecipesController extends Controller
         $request->validate([
             'title' => 'required',
             'instructions' => 'required',
+            'ingredients' => 'required',
         ]);
 
         if (auth()->id() != $recipe->users_id)
@@ -99,6 +101,13 @@ class RecipesController extends Controller
         $recipe['instructions'] = $request->instructions;
 
         $recipe->save();
+
+        $ingredients = array_map(function($name){
+            $ingredient = Ingredients::firstOrCreate(['name' => $name]);
+            return $ingredient->id;
+        }, explode(PHP_EOL, $request->ingredients));
+
+        $recipe->ingredients()->sync($ingredients);
 
         return redirect(route('recipes.show', compact('recipe')));
     }
