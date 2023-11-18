@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ingredients;
 use App\Models\Recipes;
+use App\Models\Tags;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -83,10 +84,10 @@ class RecipesController extends Controller
         $recipe->ingredients = $recipe->ingredients
             ->pluck('name')
             ->implode(PHP_EOL);
-        
+
         $recipe->tags = $recipe->tags
-        ->pluck('name')
-        ->implode(' ');
+            ->pluck('name')
+            ->implode(' ');
 
         return view('recipes.edit', compact('recipe'));
     }
@@ -118,6 +119,18 @@ class RecipesController extends Controller
         }, explode(PHP_EOL, $request->ingredients));
 
         $recipe->ingredients()->sync($ingredients);
+
+        $tags = array_filter(array_map(function ($name) {
+            $name = trim($name);
+            if (!empty($name)) {
+                $tag = Tags::firstOrCreate(['name' => $name]);
+
+                return $tag->id;
+            }
+            return null;
+        }, explode(' ', str_replace(PHP_EOL, ' ', $request->tags))));
+
+        $recipe->tags()->sync($tags);
 
         return redirect(route('recipes.show', compact('recipe')));
     }
