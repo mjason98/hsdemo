@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Recipes;
 use App\Models\Ingredients;
+use App\Models\Recipes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,11 +14,6 @@ class RecipesController extends Controller
      */
     public function index(Request $request)
     {
-        // $user = $request->user();
-        // $recipes = Recipes::where('users_id', $user->id)
-        //     ->orderBy('created_at', 'desc')
-        //     ->get();
-
         $recipes = Recipes::query()
             ->with(['ingredients'])
             ->where('users_id', auth()->id())
@@ -54,8 +49,9 @@ class RecipesController extends Controller
         $recipe = new Recipes($recepy_form);
         $recipe->save();
 
-        $ingredients = array_map(function($name){
+        $ingredients = array_map(function ($name) {
             $ingredient = Ingredients::firstOrCreate(['name' => $name]);
+
             return $ingredient->id;
         }, explode(PHP_EOL, $request->ingredients));
 
@@ -102,16 +98,18 @@ class RecipesController extends Controller
             'ingredients' => 'required',
         ]);
 
-        if (auth()->id() != $recipe->users_id)
+        if (auth()->id() != $recipe->users_id) {
             return back()->withInput()->withErrors(['error' => 'User is not the owner of the recipe']);
+        }
 
         $recipe['title'] = $request->title;
         $recipe['instructions'] = $request->instructions;
 
         $recipe->save();
 
-        $ingredients = array_map(function($name){
+        $ingredients = array_map(function ($name) {
             $ingredient = Ingredients::firstOrCreate(['name' => $name]);
+
             return $ingredient->id;
         }, explode(PHP_EOL, $request->ingredients));
 
@@ -130,6 +128,7 @@ class RecipesController extends Controller
         //delete
         if ($user_id == $recipe->users_id) {
             $recipe->delete();
+
             return redirect(route('recipes.index'));
         }
 
