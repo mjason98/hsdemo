@@ -36,7 +36,7 @@
                 <div x-show="showModal" class="fixed inset-0 bg-black opacity-50"></div>
 
                 <div x-show="showModal" class="fixed inset-0 flex items-center justify-center">
-                    <div class="bg-white p-8 rounded-xl shadow-md text-xl text-center">
+                    <div class="bg-[#d6d6d6] border-2 border-gray-800 p-8 rounded-xl shadow-md text-xl text-center">
                         <p class="mb-4">Are you sure you want to delete this recipe?</p>
                         <p class="mb-4">Art shall not be erased!
                             <i class="fa-solid fa-face-sad-tear"></i>
