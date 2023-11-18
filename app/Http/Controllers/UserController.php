@@ -11,7 +11,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $recipes = Recipes::query()
-            ->with(['ingredients', 'tags'])
+            ->with(['ingredients', 'tags', 'media'])
             ->where('users_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->limit(2)
