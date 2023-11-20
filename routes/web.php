@@ -64,3 +64,6 @@ Route::get('/user/{user}', [\App\Http\Controllers\UserController::class, 'show']
 Route::get('/user/{user}/edit', [\App\Http\Controllers\UserController::class, 'edit'])->middleware(['auth'])->name('user.edit');
 
 Route::put('/user/{user}/edit', [\App\Http\Controllers\UserController::class, 'update'])->middleware(['auth'])->name('user.update');
+
+// Search
+Route::get('/search', [\App\Http\Controllers\SearchRecipeController::class, 'index'])->middleware(['auth'])->name('search.index');
