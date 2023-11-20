@@ -10,7 +10,7 @@ class SignInController extends Controller
 {
     public function showSignInForm()
     {
-        return view('signin');
+        return view('auth.signin');
     }
 
     public function signIn(Request $request)

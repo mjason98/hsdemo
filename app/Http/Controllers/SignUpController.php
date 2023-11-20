@@ -12,7 +12,7 @@ class SignUpController extends Controller
 {
     public function showSignInForm()
     {
-        return view('signup');
+        return view('auth.signup');
     }
 
     public function signUp(Request $request)

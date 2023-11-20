@@ -21,7 +21,7 @@ Route::get('/signup', [\App\Http\Controllers\SignUpController::class, 'showSignI
 Route::post('/signup', [\App\Http\Controllers\SignUpController::class, 'signUp'])->name('signup');
 
 Route::get('/verify-success', function () {
-    return view('signup-success');
+    return view('auth.signup-success');
 })->name('verify.success');
 
 // Handle sign-out
@@ -32,7 +32,7 @@ Route::get('/explore', [\App\Http\Controllers\ExploreController::class, 'index']
 
 // verify your email dude
 Route::get('/email/verify', function () {
-    return view('signup-success');
+    return view('auth.signup-success');
 })->middleware('auth')->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
@@ -48,7 +48,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 Route::get('/forgot-password', [\App\Http\Controllers\ForgotPassword::class, 'index'])->name('password.request');
 
 Route::get('/reset-password/{token}', function (string $token) {
-    return view('reset-password', ['token' => $token]);
+    return view('auth.reset-password', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
 
 Route::post('/forgot-password', [\App\Http\Controllers\ForgotPassword::class, 'recoverPassword'])->name('forgotpassword');
