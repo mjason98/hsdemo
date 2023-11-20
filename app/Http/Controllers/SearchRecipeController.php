@@ -15,13 +15,33 @@ class SearchRecipeController extends Controller
         } else {
             $search_string = $request->search_string;
 
+            $patterns = explode(' ', str_replace(['.', ';', ','], ' ', $search_string));
+            
+            ray($patterns);
+
             $recipes = Recipes::query()
                 ->with(['ingredients', 'tags', 'media'])
+                ->where(function ($query) use ($patterns) {
+                    foreach ($patterns as $pattern) {
+                        $pattern = trim($pattern);
+
+                        if (empty($pattern))
+                            continue;
+                        
+                        $query->orWhere(function ($subquery) use ($pattern) {
+                            $subquery->whereHas('ingredients', function ($subsubquery) use ($pattern) {
+                                $subsubquery->where('name', 'like', '%' . $pattern . '%');
+                            })
+                                ->orWhereHas('tags', function ($subsubquery) use ($pattern) {
+                                    $subsubquery->where('name', 'like', '%' . $pattern . '%');
+                                })
+                                ->orWhere('title', 'like', '%' . $pattern . '%');
+                        });
+                    }
+                })
                 ->orderBy('created_at', 'desc')
                 ->get();
         }
-        
-        ray($search_string);
 
         return view('search.index', compact(['recipes', 'search_string']));
     }
