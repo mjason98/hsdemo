@@ -4,6 +4,9 @@
 
 This app mirrors the format of social media platforms but centers around sharing and discovering food recipes.
 
+## Demo
+
+For a live demo, follow this [link](https://xochi.harbourspace.site/)
 
 ## Requirements
 

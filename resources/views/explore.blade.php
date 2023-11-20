@@ -26,7 +26,7 @@
         <div class="flex flex-grow w-[80%] max-w-[60%] pl-10 pr-5 flex-col items-center justify-start gap-16" style="{height: calc(100vh - 64px);}">
             <div class="flex flex-row p-5 gap-10 items-center">
                 <i class="fa-solid fa-star fa-xl"></i>
-                <div class="text-5xl h-[48px]"> Today's suggestions </div>
+                <div class="text-5xl h-[48px]"> Suggestions </div>
                 <i class="fa-solid fa-star fa-xl"></i>
             </div>
             <div class="flex flex-col gap-8 items-center justify-center w-full">
