@@ -3,11 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\NewUserCreated;
+use App\Models\AdminEmails;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
-
-use App\Models\AdminEmails;
 
 class SendNewUserNotification implements ShouldQueue
 {
@@ -19,8 +18,7 @@ class SendNewUserNotification implements ShouldQueue
 
         $admins = AdminEmails::all();
 
-        foreach($admins as $admin)
-        {
+        foreach ($admins as $admin) {
             Mail::to($admin->email)->send(new \App\Mail\NewUserNotification($user));
         }
     }

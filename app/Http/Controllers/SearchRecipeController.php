@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Recipes;
+use Illuminate\Http\Request;
 
 class SearchRecipeController extends Controller
 {
@@ -16,8 +16,6 @@ class SearchRecipeController extends Controller
             $search_string = $request->search_string;
 
             $patterns = explode(' ', str_replace(['.', ';', ','], ' ', $search_string));
-            
-            ray($patterns);
 
             $recipes = Recipes::query()
                 ->with(['ingredients', 'tags', 'media'])
@@ -25,17 +23,18 @@ class SearchRecipeController extends Controller
                     foreach ($patterns as $pattern) {
                         $pattern = trim($pattern);
 
-                        if (empty($pattern))
+                        if (empty($pattern)) {
                             continue;
-                        
+                        }
+
                         $query->orWhere(function ($subquery) use ($pattern) {
                             $subquery->whereHas('ingredients', function ($subsubquery) use ($pattern) {
-                                $subsubquery->where('name', 'like', '%' . $pattern . '%');
+                                $subsubquery->where('name', 'like', '%'.$pattern.'%');
                             })
                                 ->orWhereHas('tags', function ($subsubquery) use ($pattern) {
-                                    $subsubquery->where('name', 'like', '%' . $pattern . '%');
+                                    $subsubquery->where('name', 'like', '%'.$pattern.'%');
                                 })
-                                ->orWhere('title', 'like', '%' . $pattern . '%');
+                                ->orWhere('title', 'like', '%'.$pattern.'%');
                         });
                     }
                 })
