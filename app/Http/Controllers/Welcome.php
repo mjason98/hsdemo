@@ -12,6 +12,6 @@ class Welcome extends Controller
             return redirect()->intended(route('explore.index'));
         }
 
-        return view('welcome');
+        return view('public.welcome');
     }
 }

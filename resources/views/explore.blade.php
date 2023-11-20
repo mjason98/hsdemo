@@ -1,10 +1,10 @@
 <x-layout>
-    <div class="flex flex-row w-full">
-        <div class="invert w-[20%] min-w-[250px] flex flex-col gap-24 p-2 items-center justify-start" style="background-image: url('{{ asset('imgs/flbg.jpg')}}'); background-size: 2000px; height: calc(100vh - 64px);">
-            <div class="h-[60px]"></div>
-            <div class="flex flex-col gap-24 items-center justify-center w-full">
+    <div class="flex sm:flex-row flex-col w-full">
+        <div class="invert sm:w-[20%] sm:min-w-[250px] w-full h-lessnav flex flex-col sm:gap-24 sm:p-2 p-6 items-center justify-start">
+            <div class="sm:h-[60px]"></div>
+            <div class="flex sm:flex-col flex-row sm:gap-24 gap-5 items-center justify-center w-full">
                 <a href="{{route('recipes.create')}}" class="items-center justify-center flex felx-row w-full">
-                    <button class="invert flex flex-col max-h-fit items-center justify-center gap-4 w-3/4 bg-black rounded-xl text-rose-500 p-6 border-b-4 border-rose-500 hover:border-blue-400 hover:text-blue-500">
+                    <button class="invert flex flex-col max-h-fit items-center justify-center gap-4 sm:w-3/4 bg-black rounded-xl text-rose-500 p-6 border-b-4 border-rose-500 hover:border-blue-400 hover:text-blue-500">
                         <img src="{{ asset('imgs/im_nr.png') }}" class="w-28 h-28">
                         <div class="flex flex-row items-center justify-center gap-2">
                             <i class="h-2 fa-solid fa-plus fa-xl"></i>
@@ -13,7 +13,7 @@
                     </button>
                 </a>
                 <a href="{{ route('recipes.index') }}" class="items-center justify-center flex felx-row w-full">
-                    <button class="invert flex flex-col items-center justify-center gap-4 w-3/4 h-auto bg-black rounded-xl text-amber-500 p-6 border-b-4 border-amber-500 hover:border-blue-400 hover:text-blue-500">
+                    <button class="invert flex flex-col items-center justify-center gap-4 sm:w-3/4 h-auto bg-black rounded-xl text-amber-500 p-6 border-b-4 border-amber-500 hover:border-blue-400 hover:text-blue-500">
                         <img src="{{ asset('imgs/im_rc.png') }}" class="w-28 h-28">
                         <div class="flex flex-row items-center justify-center gap-2">
                             <i class="fa-solid fa-book fa-xl"></i>
@@ -23,17 +23,17 @@
                 </a>
             </div>
         </div>
-        <div class="flex flex-grow w-[80%] max-w-[60%] pl-10 pr-5 flex-col items-center justify-start gap-16" style="{height: calc(100vh - 64px);}">
+        <div class="flex flex-grow sm:w-[80%] w-[99%] sm:max-w-[60%] sm:pl-10 sm:pr-5 px-5 sm:pb-0 pb-5 flex-col items-center justify-start gap-16" style="{height: calc(100vh - 64px);}">
             <div class="flex flex-row p-5 gap-10 items-center">
                 <i class="fa-solid fa-star fa-xl"></i>
-                <div class="text-5xl h-[48px]"> Today's suggestions </div>
+                <div class="text-5xl h-[48px]"> Suggestions </div>
                 <i class="fa-solid fa-star fa-xl"></i>
             </div>
             <div class="flex flex-col gap-8 items-center justify-center w-full">
                 @foreach($recipes as $recipe)
                 <x-white-box-simple>
 
-                    <div class="grid grid-cols-2 w-full">
+                    <div class="sm:grid sm:grid-cols-2 flex flex-col sm:gap-0 gap-3 w-full">
                         <img src="{{$recipe->getImageUrl('thumbnail')}}" class="basis-1/3 flex rounded-xl w-[100px] h-[100px] border-2 border-gray-800" />
                         
                         <div class="basis-2/3 flex flex-col gap-1">

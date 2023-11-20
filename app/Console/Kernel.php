@@ -10,7 +10,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\SendDailyUsageEmail::class,
     ];
-    
+
     /**
      * Define the application's command schedule.
      */

@@ -30,4 +30,19 @@
     {{$slot}}
 </body>
 
+<style>
+    @media (min-width: 640px) {
+        .h-lessnav {
+            background-image: url('{{ asset('imgs/flbg.jpg')}}');
+            background-size: 2000px;
+            height: calc(100vh - 64px);
+        }
+    }
+
+    .h-lessnav {
+            background-image: url('{{ asset('imgs/flbg.jpg')}}');
+            background-size: 2000px;
+        }
+</style>
+
 </html>

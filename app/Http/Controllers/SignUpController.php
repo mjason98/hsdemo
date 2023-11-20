@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewUserCreated;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use \App\Events\NewUserCreated;
 
 class SignUpController extends Controller
 {
     public function showSignInForm()
     {
-        return view('signup');
+        return view('auth.signup');
     }
 
     public function signUp(Request $request)
