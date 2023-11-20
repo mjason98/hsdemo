@@ -15,11 +15,17 @@ class RecipesController extends Controller
      */
     public function index(Request $request)
     {
+        $perPage = 10;
+
         $recipes = Recipes::query()
             ->with(['ingredients', 'tags', 'media'])
             ->where('users_id', auth()->id())
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate($perPage);
+
+        $page = $request->input('page', 1);
+
+        $recipes->appends(['page' => $page]);
 
         return view('recipes.index', [
             'recipes' => $recipes,
@@ -61,7 +67,7 @@ class RecipesController extends Controller
 
         $tags = array_filter(array_map(function ($name) {
             $name = str_replace('#', '', trim($name));
-            if (! empty($name)) {
+            if (!empty($name)) {
                 $tag = Tags::firstOrCreate(['name' => $name]);
 
                 return $tag->id;
@@ -147,7 +153,7 @@ class RecipesController extends Controller
 
         $tags = array_filter(array_map(function ($name) {
             $name = str_replace('#', '', trim($name));
-            if (! empty($name)) {
+            if (!empty($name)) {
                 $tag = Tags::firstOrCreate(['name' => $name]);
 
                 return $tag->id;
