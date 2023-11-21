@@ -57,29 +57,10 @@ class RecipesController extends Controller
         $recipe = new Recipes($recepy_form);
         $recipe->save();
 
-        $ingredients = array_map(function ($name) {
-            $ingredient = Ingredients::firstOrCreate(['name' => $name]);
+        $recipe->ingredients()->sync($this->parceIngredients($request->ingredients));
 
-            return $ingredient->id;
-        }, explode(PHP_EOL, $request->ingredients));
-
-        $recipe->ingredients()->sync($ingredients);
-
-        $tags = array_filter(array_map(function ($name) {
-            $name = str_replace('#', '', trim($name));
-            if (!empty($name)) {
-                $tag = Tags::firstOrCreate(['name' => $name]);
-
-                return $tag->id;
-            }
-
-            return null;
-        }, explode(' ', str_replace(PHP_EOL, ' ', $request->tags))));
-
-        $recipe->tags()->sync($tags);
-
-        //image
-        //image
+        $recipe->tags()->sync($this->parceTags($request->tags));
+        
         if ($request->hasFile('image')) {
             $recipe->addMediaFromRequest('image')->toMediaCollection();
         }
@@ -143,26 +124,9 @@ class RecipesController extends Controller
 
         $recipe->save();
 
-        $ingredients = array_map(function ($name) {
-            $ingredient = Ingredients::firstOrCreate(['name' => $name]);
+        $recipe->ingredients()->sync($this->parceIngredients($request->ingredients));
 
-            return $ingredient->id;
-        }, explode(PHP_EOL, $request->ingredients));
-
-        $recipe->ingredients()->sync($ingredients);
-
-        $tags = array_filter(array_map(function ($name) {
-            $name = str_replace('#', '', trim($name));
-            if (!empty($name)) {
-                $tag = Tags::firstOrCreate(['name' => $name]);
-
-                return $tag->id;
-            }
-
-            return null;
-        }, explode(' ', str_replace(PHP_EOL, ' ', $request->tags))));
-
-        $recipe->tags()->sync($tags);
+        $recipe->tags()->sync($this->parceTags($request->tags));
 
         //image
         if ($request->hasFile('image')) {
@@ -188,5 +152,34 @@ class RecipesController extends Controller
         }
 
         return back()->withInput()->withErrors(['delete' => 'User is not the owner of the recipe']);
+    }
+
+    //------------------------------------------------
+    
+    private function parceIngredients($raw_ingredients)
+    {
+        $ingredients = array_map(function ($name) {
+            $ingredient = Ingredients::firstOrCreate(['name' => $name]);
+
+            return $ingredient->id;
+        }, explode(PHP_EOL, $raw_ingredients));
+
+        return $ingredients;
+    }
+
+    private function parceTags($raw_tags)
+    {
+        $tags = array_filter(array_map(function ($name) {
+            $name = str_replace('#', '', trim($name));
+            if (!empty($name)) {
+                $tag = Tags::firstOrCreate(['name' => $name]);
+
+                return $tag->id;
+            }
+
+            return null;
+        }, explode(' ', str_replace(PHP_EOL, ' ', $raw_tags))));
+
+        return $tags;
     }
 }
