@@ -9,9 +9,13 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
+use Illuminate\Support\Str;
+
 class Recipes extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, HasSlug;
 
     protected $fillable = [
         'title',
@@ -58,5 +62,14 @@ class Recipes extends Model implements HasMedia
             ->fit(Manipulations::FIT_CROP, 128, 128)
             ->nonQueued();
 
+    }
+
+    public function getSlugOptions(): SlugOptions
+    {
+        $randomString = Str::random(6);
+
+        return SlugOptions::create()
+            ->generateSlugsFrom(['title', $randomString])
+            ->saveSlugsTo('slug');
     }
 }

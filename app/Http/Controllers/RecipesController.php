@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class RecipesController extends Controller
 {
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     /**
      * Display a listing of the resource.
      */
