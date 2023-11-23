@@ -8,12 +8,15 @@ use Illuminate\View\Component;
 
 class BasicButton extends Component
 {
+    public $w;
+    public $h;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(string $w = 'w-full', string $h = '')
     {
-        //
+        $this->w = $w;
+        $this->h = $h;
     }
 
     /**

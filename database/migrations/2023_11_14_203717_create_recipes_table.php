@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('instructions', 1024);
             $table->foreignId('users_id')->constrained();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
