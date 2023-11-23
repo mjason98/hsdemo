@@ -1,9 +1,9 @@
 <x-layout>
     <div class="py-3 px-4 flex flex-col w-full gap-4 items-center" style="height: calc(100vh - 64px);">
-        <form class="flex flex-col sm:flex-row sm:w-70 w-full text-xl sm:h-fit p-4 gap-10 sm:gam-5" action="{{route('search.index')}}" method="get">
-            <input class="text-gray-800 text-4xl h-auto resize-none border-2 rounded-xl border-gray-800 p-3 focus:outline-none bg-white" type="text" name="search_string" id="search_string" value="{{old('search_string')??$search_string}}" placeholder="title, ingredients, tags"/>
+        <form class="flex flex-col sm:flex-row sm:w-70 w-full sm:justify-center text-xl sm:h-fit p-4 gap-10 sm:gam-5" action="{{route('search.index')}}" method="get">
+            <input class="w-full sm:max-w-[70%] text-gray-800 text-4xl h-auto resize-none border-2 rounded-xl border-gray-800 p-3 focus:outline-none bg-white" type="text" name="search_string" id="search_string" value="{{old('search_string')??$search_string}}" placeholder="title, ingredients, tags"/>
             
-            <x-basic-button>
+            <x-basic-button w="w-full sm:max-w-[180px]" h="sm:h-full h-[55px]">
                 <i class="h-2 fa-solid fa-search fa-md"></i>
                 Search
             </x-basic-button>
